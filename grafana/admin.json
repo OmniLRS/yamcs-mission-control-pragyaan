@@ -1,0 +1,835 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 36,
+      "options": {
+        "imageUrl": "https://images.squarespace-cdn.com/content/v1/65b7646e25e9311db2c8e093/3a87b810-b32f-4475-b76e-6007ceedfa35/JAOPS250-60mmWhite.png",
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "title": "",
+      "type": "jaops-staticimage-panel"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 11,
+        "x": 7,
+        "y": 0
+      },
+      "id": 35,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1 style=\"text-align: center;\">\r\n  Admin Mission Control Screen \r\n</h1>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 34,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2026-02-12T19:46:41+09:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2026-02-12T19:46:41+09:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "22px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": true
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "16px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "digitalSettings": {
+          "fillColor": "orange",
+          "glowSize": 0,
+          "strokeColor": "dark-orange",
+          "strokeWidth": 0
+        },
+        "fontMono": false,
+        "mode": "time",
+        "refresh": "sec",
+        "style": "text",
+        "timeSettings": {
+          "fontSize": "26px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": true,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "3.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 42,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 2
+      },
+      "id": 37,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1 style=\"text-align: center;\">\r\n  Battery Control \r\n</h1>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 3,
+        "y": 2
+      },
+      "id": 38,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1 style=\"text-align: center;\">\r\n  Resource Control \r\n</h1>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 7,
+        "y": 2
+      },
+      "id": 39,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1 style=\"text-align: center;\">\r\n  Fault Control \r\n</h1>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 10,
+        "y": 2
+      },
+      "id": 40,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 12,
+        "x": 12,
+        "y": 2
+      },
+      "id": 23,
+      "options": {
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "${image_url}",
+          "refId": "A",
+          "type": "image"
+        }
+      ],
+      "title": "Admin Monitoring Image",
+      "type": "jaops-telemetricimage-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 4
+      },
+      "id": 26,
+      "options": {
+        "commandForms": {
+          "admin_set_battery_percentage0": {
+            "arguments": {
+              "battery_percentage": 100
+            },
+            "label": "100% Battery"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_set_battery_percentage",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 3,
+        "y": 4
+      },
+      "id": 27,
+      "options": {
+        "commandForms": {
+          "admin_inject_fault0": {
+            "label": "Inject Fault"
+          },
+          "admin_water_detection0": {
+            "arguments": {
+              "trigger_water_detection": true
+            },
+            "isDualButton": true,
+            "label": "",
+            "offCommand": {
+              "arguments": {
+                "trigger_water_detection": false
+              },
+              "label": "False"
+            },
+            "onCommand": {
+              "arguments": {
+                "trigger_water_detection": true
+              },
+              "label": "True"
+            }
+          },
+          "deploy_solar_panel0": {
+            "arguments": {
+              "deployment": "DEPLOY"
+            },
+            "label": "Deploy Solar",
+            "size": "sm"
+          }
+        },
+        "dualButtonStates": {
+          "admin_water_detection0": "on"
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_water_detection",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "Water Detection",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 7,
+        "y": 4
+      },
+      "id": 24,
+      "options": {
+        "commandForms": {
+          "admin_inject_fault0": {
+            "label": "Inject"
+          },
+          "deploy_solar_panel0": {
+            "arguments": {
+              "deployment": "DEPLOY"
+            },
+            "label": "Deploy Solar",
+            "size": "sm"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_inject_fault",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "Motor Controller Fault",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 6
+      },
+      "id": 31,
+      "options": {
+        "commandForms": {
+          "admin_set_battery_percentage0": {
+            "arguments": {
+              "battery_percentage": 80
+            },
+            "label": "80% Battery"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_set_battery_percentage",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 9,
+        "x": 3,
+        "y": 6
+      },
+      "id": 25,
+      "options": {
+        "pageSize": 10,
+        "pagination": false,
+        "showArguments": true,
+        "visibleFields": [
+          "time",
+          "command",
+          "comment",
+          "queued",
+          "released",
+          "sent",
+          "extraAcks",
+          "completion"
+        ]
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "command-history"
+        }
+      ],
+      "title": "Command History",
+      "type": "jaops-commandhistory-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 8
+      },
+      "id": 29,
+      "options": {
+        "commandForms": {
+          "admin_set_battery_percentage0": {
+            "arguments": {
+              "battery_percentage": 60
+            },
+            "label": "60% Battery"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_set_battery_percentage",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 10
+      },
+      "id": 30,
+      "options": {
+        "commandForms": {
+          "admin_set_battery_percentage0": {
+            "arguments": {
+              "battery_percentage": 40
+            },
+            "label": "40% Battery"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_set_battery_percentage",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 12
+      },
+      "id": 32,
+      "options": {
+        "commandForms": {
+          "admin_set_battery_percentage0": {
+            "arguments": {
+              "battery_percentage": 20
+            },
+            "label": "20% Battery"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_set_battery_percentage",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 14
+      },
+      "id": 33,
+      "options": {
+        "commandForms": {
+          "admin_set_battery_percentage0": {
+            "arguments": {
+              "battery_percentage": 0
+            },
+            "label": "0% Battery"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Admin/admin_set_battery_percentage",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 0,
+        "y": 16
+      },
+      "id": 41,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "workshop_realtime",
+          "value": "workshop_realtime"
+        },
+        "hide": 2,
+        "name": "endpoint_variable",
+        "options": [
+          {
+            "selected": false,
+            "text": "new-endpoint",
+            "value": "new-endpoint"
+          },
+          {
+            "selected": true,
+            "text": "workshop_realtime",
+            "value": "workshop_realtime"
+          }
+        ],
+        "query": "new-endpoint, workshop_realtime",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "/Admin/camera/images_monitoring/url_full_nginx",
+          "value": "/Admin/camera/images_monitoring/url_full_nginx"
+        },
+        "hide": 2,
+        "name": "image_url",
+        "options": [
+          {
+            "selected": false,
+            "text": "/Admin/camera/images_monitoring/url_full",
+            "value": "/Admin/camera/images_monitoring/url_full"
+          },
+          {
+            "selected": true,
+            "text": "/Admin/camera/images_monitoring/url_full_nginx",
+            "value": "/Admin/camera/images_monitoring/url_full_nginx"
+          }
+        ],
+        "query": "/Admin/camera/images_monitoring/url_full, /Admin/camera/images_monitoring/url_full_nginx",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Workshop - Admin",
+  "uid": "141899cf-2503-48c0-b7db-8817ef4dc3d1",
+  "version": 9
+}

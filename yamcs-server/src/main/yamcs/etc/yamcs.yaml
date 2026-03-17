@@ -1,0 +1,37 @@
+services:
+  - class: org.yamcs.http.HttpServer
+    args:
+      port: 8090
+      address: "0.0.0.0"
+      cors:
+        allowOrigin: "*"
+        allowCredentials: false # disabled if not using authentication
+        # allowCredentials: true  # Required for authentication
+
+# This is where Yamcs will persist its data. Paths are resolved relative to where Yamcs is running
+# from (by default: target/yamcs). This means that `mvn clean` will remove also persisted data.
+dataDir: yamcs-data
+# Change this property to an absolute path in case you want to persist your data.
+# dataDir: /storage/yamcs-data
+
+instances:
+  - workshop
+
+# Secret key unique to a particular Yamcs installation.
+# This is used to provide cryptographic signing.
+secretKey: changeme
+
+buckets:
+  - name: images_streaming
+    path: /tmp/images_streaming
+  - name: images_oncommand
+    path: /tmp/images_oncommand
+  - name: images_depth
+    path: /tmp/images_depth
+  - name: images_lander
+    path: /tmp/images_lander
+  - name: images_apxs
+    path: /tmp/images_apxs
+  - name: images_monitoring
+    path: /tmp/images_monitoring
+

@@ -1,0 +1,4 @@
+Pillow>=10
+yamcs-client>=1.9
+yamcs-pymdb>=1.2
+numpy

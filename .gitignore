@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments
+.env
+.venv
+venv/
+env/
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+*~
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+
+# Eclipse metadata
+/.settings/
+/.classpath
+/.project
+
+# VSCode
+.vscode/settings.json
+
+# Docker logs for CI
+docker/all.log
+
+# Maven output (Yamcs server is a Maven project)
+**/target/**

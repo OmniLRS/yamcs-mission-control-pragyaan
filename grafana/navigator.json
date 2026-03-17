@@ -1,0 +1,2128 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 4,
+  "links": [],
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "imageUrl": "https://images.squarespace-cdn.com/content/v1/65b7646e25e9311db2c8e093/3a87b810-b32f-4475-b76e-6007ceedfa35/JAOPS250-60mmWhite.png",
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "title": "",
+      "type": "jaops-staticimage-panel"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 11,
+        "x": 7,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1 style=\"text-align: center;\">\n  Navigator Mission Control Screen \n</h1>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 32,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2026-02-12T19:46:41+09:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2026-02-12T19:46:41+09:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "22px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": true
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "16px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "digitalSettings": {
+          "fillColor": "orange",
+          "glowSize": 0,
+          "strokeColor": "dark-orange",
+          "strokeWidth": 0
+        },
+        "fontMono": false,
+        "mode": "time",
+        "refresh": "sec",
+        "style": "text",
+        "timeSettings": {
+          "fontSize": "26px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": true,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "3.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 18,
+        "y": 1
+      },
+      "id": 31,
+      "options": {
+        "commandForms": {
+          "deploy_solar_panel0": {
+            "arguments": {
+              "deployment": "DEPLOYED"
+            },
+            "label": "Deploy Solar Panel"
+          },
+          "go_nogo_command0": {
+            "arguments": {
+              "decision": "GO"
+            },
+            "isDualButton": true,
+            "label": "",
+            "offCommand": {
+              "arguments": {
+                "decision": "NOGO"
+              },
+              "label": "NOGO"
+            },
+            "onCommand": {
+              "arguments": {
+                "decision": "GO"
+              },
+              "label": "GO"
+            },
+            "size": "sm"
+          }
+        },
+        "dualButtonStates": {
+          "go_nogo_command0": "on"
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Rover/system/go_nogo_command",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "GO": {
+                  "color": "green",
+                  "index": 1
+                },
+                "NOGO": {
+                  "color": "red",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 22,
+        "y": 1
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "/Rover/go_nogo",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 0,
+        "y": 2
+      },
+      "id": 10,
+      "options": {
+        "commandForms": {
+          "camera_capture_high0": {
+            "label": "Capture Image"
+          },
+          "change_camera_settings0": {
+            "arguments": {
+              "config_path": "mock_string"
+            },
+            "label": "Cam. Settings",
+            "size": "sm"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Rover/camera/change_camera_settings",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 2,
+        "y": 2
+      },
+      "id": 12,
+      "options": {
+        "commandForms": {
+          "camera_capture_high0": {
+            "label": "Capture Image"
+          },
+          "change_camera_settings0": {
+            "label": "Change Settings"
+          },
+          "change_payload_settings0": {
+            "arguments": {
+              "config_path": "mock_path"
+            },
+            "label": "Payload Settings",
+            "size": "sm"
+          },
+          "lander_camera_capture0": {
+            "label": "Request Lander Image"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Rover/payload/change_payload_settings",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 1,
+        "x": 4,
+        "y": 2
+      },
+      "id": 36,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 5,
+        "y": 2
+      },
+      "id": 9,
+      "options": {
+        "commandForms": {
+          "camera_capture_high0": {
+            "label": "High Res Image",
+            "size": "sm"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Rover/camera/camera_capture_high",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 7,
+        "y": 2
+      },
+      "id": 28,
+      "options": {
+        "commandForms": {
+          "camera_capture_depth0": {
+            "label": "Depth Image",
+            "size": "sm"
+          },
+          "camera_capture_high0": {
+            "label": "Capture Image"
+          },
+          "change_camera_settings0": {
+            "label": "Change Settings"
+          },
+          "change_payload_settings0": {
+            "arguments": {
+              "config_path": "mock_path"
+            },
+            "label": "Payload Settings"
+          },
+          "lander_camera_capture0": {
+            "label": "Request Lander Image"
+          },
+          "payload_capture_apxs0": {
+            "label": "Capture Depth"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Rover/camera/camera_capture_depth",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 9,
+        "y": 2
+      },
+      "id": 11,
+      "options": {
+        "commandForms": {
+          "camera_capture_high0": {
+            "label": "Capture Image"
+          },
+          "change_camera_settings0": {
+            "label": "Change Settings"
+          },
+          "lander_camera_capture0": {
+            "label": "Lander Image",
+            "size": "sm"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Lander/camera/lander_camera_capture",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 11,
+        "y": 2
+      },
+      "id": 33,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 13,
+        "y": 2
+      },
+      "id": 18,
+      "options": {
+        "commandForms": {
+          "camera_capture_high0": {
+            "label": "Capture Image"
+          },
+          "change_camera_settings0": {
+            "label": "Change Settings"
+          },
+          "change_payload_settings0": {
+            "arguments": {
+              "config_path": "mock_path"
+            },
+            "label": "Payload Settings"
+          },
+          "lander_camera_capture0": {
+            "label": "Request Lander Image"
+          },
+          "payload_capture_apxs0": {
+            "label": "APXS Spectrum",
+            "size": "sm"
+          }
+        }
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "command": "/Rover/payload/payload_capture_apxs",
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "commanding"
+        }
+      ],
+      "title": "",
+      "type": "jaops-commanding-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "decimals": 0,
+          "fieldMinMax": false,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 15,
+        "y": 2
+      },
+      "id": 14,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "customVariableString": false,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "fields": [],
+          "parameter": "/Rover/battery_charge",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "Battery",
+      "type": "gauge"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 1,
+        "x": 17,
+        "y": 2
+      },
+      "id": 37,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "left",
+            "fillOpacity": 50,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineStyle": {
+              "dash": [
+                0,
+                10
+              ],
+              "fill": "dot"
+            },
+            "lineWidth": 2,
+            "pointShape": "circle",
+            "pointSize": {
+              "fixed": 1,
+              "min": -1
+            },
+            "pointStrokeWidth": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "show": "points+lines"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 7,
+        "x": 17,
+        "y": 3
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mapping": "auto",
+        "series": [
+          {
+            "frame": {
+              "matcher": {
+                "id": "byIndex",
+                "options": 0
+              }
+            },
+            "x": {
+              "matcher": {
+                "id": "byName",
+                "options": "/Rover/pose_ground_truth.position.x"
+              }
+            },
+            "y": {
+              "matcher": {
+                "id": "byName",
+                "options": "/Rover/pose_ground_truth.position.y"
+              }
+            }
+          }
+        ],
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "/Rover/pose_ground_truth.position.x",
+          "refId": "A",
+          "type": "plot"
+        },
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "hide": false,
+          "parameter": "/Rover/pose_ground_truth.position.y",
+          "refId": "B",
+          "type": "plot"
+        }
+      ],
+      "title": "Rover Map",
+      "transformations": [
+        {
+          "id": "concatenate",
+          "options": {
+            "frameNameLabel": "frame",
+            "frameNameMode": "label"
+          }
+        }
+      ],
+      "type": "xychart"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 0,
+        "y": 4
+      },
+      "id": 5,
+      "options": {
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "${image_url}",
+          "refId": "A",
+          "type": "image"
+        }
+      ],
+      "title": "Low Resolution Streaming",
+      "type": "jaops-telemetricimage-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 5,
+        "y": 4
+      },
+      "id": 6,
+      "options": {
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "${oncommand_image_url}",
+          "refId": "A",
+          "type": "image"
+        }
+      ],
+      "title": "High Resolution On Command",
+      "type": "jaops-telemetricimage-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 10,
+        "y": 4
+      },
+      "id": 27,
+      "options": {
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "${depth_image}",
+          "refId": "A",
+          "type": "image"
+        }
+      ],
+      "title": "Depth Image",
+      "type": "jaops-telemetricimage-panel"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 15,
+        "y": 6
+      },
+      "id": 34,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 15,
+        "y": 11
+      },
+      "id": 35,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1 style=\"text-align: center;\">\r\n  IMU \r\n</h1>\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "12.1.1",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 250,
+          "min": 0,
+          "noValue": "nodata",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "cps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 13
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "/Rover/neutron_counts",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "Neutron Spectrometer",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 5,
+        "y": 13
+      },
+      "id": 7,
+      "options": {
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "${images_apxs}",
+          "refId": "A",
+          "type": "image"
+        }
+      ],
+      "title": "APXS Spectrum",
+      "type": "jaops-telemetricimage-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 5,
+        "x": 10,
+        "y": 13
+      },
+      "id": 25,
+      "options": {
+        "objectFit": "contain",
+        "transform": ""
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "${lander_image}",
+          "refId": "A",
+          "type": "image"
+        }
+      ],
+      "title": "Lander Camera",
+      "type": "jaops-telemetricimage-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "decimals": 1,
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "from": -5,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": -180,
+                "result": {
+                  "color": "red",
+                  "index": 1
+                },
+                "to": -10
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 10,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 180
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": -10,
+                "result": {
+                  "color": "orange",
+                  "index": 3
+                },
+                "to": -5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5,
+                "result": {
+                  "color": "orange",
+                  "index": 4
+                },
+                "to": 10
+              },
+              "type": "range"
+            }
+          ],
+          "max": 180,
+          "min": -180,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "transparent",
+                "value": -180
+              },
+              {
+                "color": "#ffffff",
+                "value": 0
+              },
+              {
+                "color": "transparent",
+                "value": 180
+              }
+            ]
+          },
+          "unit": "degree"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 15,
+        "y": 13
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "customVariableString": false,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "fields": [],
+          "parameter": "/Rover/imu_orientation.roll",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "Roll",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "decimals": 1,
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "from": -90,
+                "result": {
+                  "color": "red",
+                  "index": 0
+                },
+                "to": -10
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": -5,
+                "result": {
+                  "color": "green",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 10,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 90
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": -10,
+                "result": {
+                  "color": "orange",
+                  "index": 3
+                },
+                "to": -5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5,
+                "result": {
+                  "color": "orange",
+                  "index": 4
+                },
+                "to": 10
+              },
+              "type": "range"
+            }
+          ],
+          "max": 90,
+          "min": -90,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "degree"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 15,
+        "y": 16
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "customVariableString": false,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "fields": [],
+          "parameter": "/Rover/imu_orientation.pitch",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "Pitch",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 17
+      },
+      "id": 26,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "new-endpoint",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "/Rover/motor_encoder[0]",
+          "refId": "A",
+          "type": "plot"
+        },
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "new-endpoint",
+          "endpointVariable": "$endpoint_variable",
+          "hide": false,
+          "parameter": "/Rover/motor_encoder[1]",
+          "refId": "B",
+          "type": "plot"
+        },
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "hide": false,
+          "parameter": "/Rover/motor_encoder[2]",
+          "refId": "C",
+          "type": "plot"
+        },
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "hide": false,
+          "parameter": "/Rover/motor_encoder[3]",
+          "refId": "D",
+          "type": "plot"
+        },
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "new-endpoint",
+          "endpointVariable": "$endpoint_variable",
+          "hide": false,
+          "parameter": "/Rover/motor_encoder[4]",
+          "refId": "E",
+          "type": "plot"
+        },
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "hide": false,
+          "parameter": "/Rover/motor_encoder[5]",
+          "refId": "F",
+          "type": "plot"
+        }
+      ],
+      "title": "Motor Encoders",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 3,
+          "min": -3,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "lengthm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 17,
+        "y": 17
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "/Rover/pose_ground_truth.position.z",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "Rover Z Position",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "decimals": 0,
+          "fieldMinMax": false,
+          "mappings": [],
+          "max": 180,
+          "min": -180,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "degree"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 15,
+        "y": 19
+      },
+      "id": 30,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 30
+        },
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "customVariableString": false,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "fields": [],
+          "parameter": "/Rover/imu_orientation.yaw",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "Yaw",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 17,
+        "x": 0,
+        "y": 22
+      },
+      "id": 19,
+      "options": {
+        "pageSize": 10,
+        "pagination": false,
+        "showArguments": true,
+        "visibleFields": [
+          "time",
+          "command",
+          "queued",
+          "released",
+          "sent"
+        ]
+      },
+      "pluginVersion": "1.0.0",
+      "targets": [
+        {
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "refId": "A",
+          "type": "command-history"
+        }
+      ],
+      "title": "Command History",
+      "type": "jaops-commandhistory-panel"
+    },
+    {
+      "datasource": {
+        "type": "jaops-yamcs-datasource",
+        "uid": "bfcecar8hnym8c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": -30,
+          "min": -100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 17,
+        "y": 22
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "aggregatePath": "",
+          "asVariable": true,
+          "datasource": {
+            "type": "jaops-yamcs-datasource",
+            "uid": "df76fq85bmha8f"
+          },
+          "endpoint": "workshop_realtime",
+          "endpointVariable": "$endpoint_variable",
+          "parameter": "/Rover/radio_rssi",
+          "refId": "A",
+          "type": "plot"
+        }
+      ],
+      "title": "Radio Signal Strength Indicator",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "/Rover/camera/images_streaming/url_full_nginx",
+          "value": "/Rover/camera/images_streaming/url_full_nginx"
+        },
+        "hide": 2,
+        "name": "image_url",
+        "options": [
+          {
+            "selected": false,
+            "text": "/Rover/camera/images_streaming/url_full",
+            "value": "/Rover/camera/images_streaming/url_full"
+          },
+          {
+            "selected": true,
+            "text": "/Rover/camera/images_streaming/url_full_nginx",
+            "value": "/Rover/camera/images_streaming/url_full_nginx"
+          }
+        ],
+        "query": "/Rover/camera/images_streaming/url_full, /Rover/camera/images_streaming/url_full_nginx",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "/Rover/camera/images_oncommand/url_full_nginx",
+          "value": "/Rover/camera/images_oncommand/url_full_nginx"
+        },
+        "hide": 2,
+        "name": "oncommand_image_url",
+        "options": [
+          {
+            "selected": false,
+            "text": "/Rover/camera/images_oncommand/url_full",
+            "value": "/Rover/camera/images_oncommand/url_full"
+          },
+          {
+            "selected": true,
+            "text": "/Rover/camera/images_oncommand/url_full_nginx",
+            "value": "/Rover/camera/images_oncommand/url_full_nginx"
+          }
+        ],
+        "query": "/Rover/camera/images_oncommand/url_full, /Rover/camera/images_oncommand/url_full_nginx",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "workshop_realtime",
+          "value": "workshop_realtime"
+        },
+        "hide": 2,
+        "name": "endpoint_variable",
+        "options": [
+          {
+            "selected": false,
+            "text": "new-endpoint",
+            "value": "new-endpoint"
+          },
+          {
+            "selected": true,
+            "text": "workshop_realtime",
+            "value": "workshop_realtime"
+          }
+        ],
+        "query": "new-endpoint, workshop_realtime",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "/Rover/payload/images_apxs/url_full_nginx",
+          "value": "/Rover/payload/images_apxs/url_full_nginx"
+        },
+        "hide": 2,
+        "name": "images_apxs",
+        "options": [
+          {
+            "selected": false,
+            "text": "/Rover/payload/images_apxs/url_full",
+            "value": "/Rover/payload/images_apxs/url_full"
+          },
+          {
+            "selected": true,
+            "text": "/Rover/payload/images_apxs/url_full_nginx",
+            "value": "/Rover/payload/images_apxs/url_full_nginx"
+          }
+        ],
+        "query": "/Rover/payload/images_apxs/url_full, /Rover/payload/images_apxs/url_full_nginx",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "/Lander/camera/images_oncommand/url_full_nginx",
+          "value": "/Lander/camera/images_oncommand/url_full_nginx"
+        },
+        "hide": 2,
+        "name": "lander_image",
+        "options": [
+          {
+            "selected": false,
+            "text": "/Lander/camera/images_oncommand/url_full",
+            "value": "/Lander/camera/images_oncommand/url_full"
+          },
+          {
+            "selected": true,
+            "text": "/Lander/camera/images_oncommand/url_full_nginx",
+            "value": "/Lander/camera/images_oncommand/url_full_nginx"
+          }
+        ],
+        "query": "/Lander/camera/images_oncommand/url_full, /Lander/camera/images_oncommand/url_full_nginx",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "/Rover/camera/images_depth/url_full_nginx",
+          "value": "/Rover/camera/images_depth/url_full_nginx"
+        },
+        "hide": 2,
+        "name": "depth_image",
+        "options": [
+          {
+            "selected": false,
+            "text": "/Rover/camera/images_depth/url_full",
+            "value": "/Rover/camera/images_depth/url_full"
+          },
+          {
+            "selected": true,
+            "text": "/Rover/camera/images_depth/url_full_nginx",
+            "value": "/Rover/camera/images_depth/url_full_nginx"
+          }
+        ],
+        "query": "/Rover/camera/images_depth/url_full,\n/Rover/camera/images_depth/url_full_nginx",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Workshop - Navigator Screen",
+  "uid": "6ed10683-421f-4156-b205-53ad1ca6bb62",
+  "version": 11
+}
