@@ -1,6 +1,8 @@
-# OmniLRS - Yamcs Mission Control
+# OmniLRS - Yamcs Mission Control - Pragyaan Rover
 
-**Mission Control System for the OmniLRS lunar rover simulator including the dedicated Yamcs configuration and related software**
+**Mission Control System for the OmniLRS lunar rover simulator**
+
+It is configured for the Pragyaan Rover reference mission, as defined in the December 2025 workshop organized by JAOPS in Tokyo. For more information on the workshop and relevant context, see [here](https://www.jaops.com/events/yamcs-grafana-and-lunar-simulator-workshop)
 
 The Yamcs Mission Control System connects the target devices (from the flight model Rover on the Moon to individual engineering model components being tested) to end-users (from operators in the Mission Control Center to engineers developing hardware).
 It provides a robust framework already proven in lunar rover missions and selected by space agencies to accelerate development and safely operate missions. 
