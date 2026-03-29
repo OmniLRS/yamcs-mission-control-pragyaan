@@ -1,4 +1,89 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_JAOPS-YAMCS-DATASOURCE",
+      "label": "jaops-yamcs-datasource",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "jaops-yamcs-datasource",
+      "pluginName": "Yamcs Datasource"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.1.1"
+    },
+    {
+      "type": "panel",
+      "id": "grafana-clock-panel",
+      "name": "Clock",
+      "version": "3.1.0"
+    },
+    {
+      "type": "panel",
+      "id": "jaops-commandhistory-panel",
+      "name": "JAOPS Command History Panel",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "jaops-commanding-panel",
+      "name": "JAOPS Commanding Panel",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "jaops-staticimage-panel",
+      "name": "JAOPS Static Image Panel",
+      "version": "1.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "jaops-yamcs-datasource",
+      "name": "Yamcs Datasource",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "state-timeline",
+      "name": "State timeline",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -19,14 +104,10 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": null,
   "links": [],
   "panels": [
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 7,
@@ -40,14 +121,9 @@
         "transform": ""
       },
       "pluginVersion": "1.0.0",
-      "title": "",
       "type": "jaops-staticimage-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 8,
@@ -65,13 +141,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -127,7 +202,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -143,10 +218,6 @@
       "datasource": {
         "type": "datasource",
         "uid": "grafana"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
       },
       "gridPos": {
         "h": 1,
@@ -210,7 +281,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "3.2.1",
+      "pluginVersion": "3.1.0",
       "targets": [
         {
           "datasource": {
@@ -221,17 +292,12 @@
           "refId": "A"
         }
       ],
-      "title": "",
       "type": "grafana-clock-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -280,7 +346,7 @@
           "command": "/Rover/system/go_nogo_command",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -288,13 +354,12 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -360,7 +425,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -369,14 +434,9 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 2,
@@ -400,7 +460,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -502,7 +562,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -511,13 +571,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -619,7 +678,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -628,14 +687,9 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 6,
@@ -657,10 +711,6 @@
       "type": "text"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 5,
@@ -684,11 +734,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -746,7 +792,7 @@
           "command": "/Rover/power/power_electronics",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -760,11 +806,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -822,7 +864,7 @@
           "command": "/Rover/power/power_electronics",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -834,10 +876,6 @@
       "type": "jaops-commanding-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 1,
@@ -855,13 +893,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -963,7 +1000,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -972,13 +1009,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1080,7 +1116,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1089,13 +1125,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1197,7 +1232,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1206,13 +1241,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1314,7 +1348,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1323,13 +1357,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1431,7 +1464,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1440,14 +1473,9 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 2,
@@ -1465,14 +1493,9 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 5,
         "w": 3,
@@ -1486,14 +1509,9 @@
         "transform": "rotate(90deg) scale(0.9)"
       },
       "pluginVersion": "1.0.0",
-      "title": "",
       "type": "jaops-staticimage-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 2,
@@ -1511,17 +1529,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -1579,7 +1592,7 @@
           "command": "/Rover/power/power_electronics",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1591,10 +1604,6 @@
       "type": "jaops-commanding-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 3,
@@ -1612,13 +1621,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1720,7 +1728,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1729,13 +1737,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1839,7 +1846,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1848,14 +1855,9 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 2,
@@ -1873,14 +1875,9 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 6,
         "w": 7,
@@ -1894,13 +1891,12 @@
         "transform": ""
       },
       "pluginVersion": "1.0.0",
-      "title": "",
       "type": "jaops-staticimage-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2002,7 +1998,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2011,17 +2007,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -2079,7 +2070,7 @@
           "command": "/Rover/power/power_electronics",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2093,11 +2084,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -2140,7 +2127,7 @@
           "command": "/Rover/system/deploy_solar_panel",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2154,7 +2141,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "description": "",
       "fieldConfig": {
@@ -2209,7 +2196,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2222,10 +2209,6 @@
       "type": "gauge"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 2,
@@ -2243,14 +2226,9 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 2,
@@ -2268,17 +2246,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -2336,7 +2309,7 @@
           "command": "/Rover/power/power_electronics",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2350,7 +2323,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2405,7 +2378,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2414,13 +2387,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2522,7 +2494,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2531,13 +2503,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2639,7 +2610,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2648,13 +2619,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2756,7 +2726,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2765,13 +2735,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2873,7 +2842,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2882,14 +2851,9 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 3,
@@ -2907,14 +2871,9 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 3,
@@ -2932,14 +2891,9 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 2,
@@ -2957,14 +2911,9 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 1,
         "w": 11,
@@ -2982,13 +2931,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3076,7 +3024,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3089,7 +3037,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3103,7 +3051,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "new-endpoint",
           "endpointVariable": "$endpoint_variable",
@@ -3117,7 +3065,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "new-endpoint",
           "endpointVariable": "$endpoint_variable",
@@ -3131,7 +3079,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3146,7 +3094,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3160,7 +3108,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3176,7 +3124,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3261,7 +3209,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3274,7 +3222,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3290,7 +3238,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3378,7 +3326,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3391,7 +3339,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3407,7 +3355,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3540,7 +3488,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3555,7 +3503,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3569,7 +3517,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3585,7 +3533,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3637,7 +3585,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3652,7 +3600,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3731,7 +3679,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3740,17 +3688,12 @@
           "type": "discrete"
         }
       ],
-      "title": "",
       "type": "state-timeline"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 6,
@@ -3778,7 +3721,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3792,7 +3735,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3879,7 +3822,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3892,7 +3835,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3906,7 +3849,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "new-endpoint",
           "endpointVariable": "$endpoint_variable",
@@ -3920,7 +3863,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3934,7 +3877,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3949,7 +3892,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -3965,7 +3908,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4053,7 +3996,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "df76fq85bmha8f"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -4066,7 +4009,6 @@
       "type": "timeseries"
     }
   ],
-  "preload": false,
   "schemaVersion": 41,
   "tags": [],
   "templating": {
@@ -4104,5 +4046,6 @@
   "timezone": "browser",
   "title": "Workshop - System Manager",
   "uid": "05580fe4-46fe-4450-ab6b-2809ae7ab131",
-  "version": 22
+  "version": 1,
+  "weekStart": ""
 }

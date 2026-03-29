@@ -1,4 +1,77 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_JAOPS-YAMCS-DATASOURCE",
+      "label": "jaops-yamcs-datasource",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "jaops-yamcs-datasource",
+      "pluginName": "Yamcs Datasource"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.1.1"
+    },
+    {
+      "type": "panel",
+      "id": "grafana-clock-panel",
+      "name": "Clock",
+      "version": "3.1.0"
+    },
+    {
+      "type": "panel",
+      "id": "jaops-commandhistory-panel",
+      "name": "JAOPS Command History Panel",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "jaops-commanding-panel",
+      "name": "JAOPS Commanding Panel",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "jaops-staticimage-panel",
+      "name": "JAOPS Static Image Panel",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "jaops-telemetricimage-panel",
+      "name": "JAOPS Telemetric Image Panel",
+      "version": "1.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "jaops-yamcs-datasource",
+      "name": "Yamcs Datasource",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,14 +91,10 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 5,
+  "id": null,
   "links": [],
   "panels": [
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 7,
@@ -39,14 +108,9 @@
         "transform": ""
       },
       "pluginVersion": "1.0.0",
-      "title": "",
       "type": "jaops-staticimage-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 11,
@@ -64,17 +128,12 @@
         "mode": "html"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "datasource",
         "uid": "grafana"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
       },
       "gridPos": {
         "h": 1,
@@ -138,7 +197,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "3.2.1",
+      "pluginVersion": "3.1.0",
       "targets": [
         {
           "datasource": {
@@ -149,17 +208,12 @@
           "refId": "A"
         }
       ],
-      "title": "",
       "type": "grafana-clock-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 14,
@@ -179,7 +233,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -194,11 +248,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 14,
@@ -218,7 +268,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -233,11 +283,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 14,
@@ -257,7 +303,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -270,10 +316,6 @@
       "type": "jaops-telemetricimage-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -291,13 +333,12 @@
         "mode": "html"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -403,7 +444,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -412,13 +453,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -524,7 +564,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -533,17 +573,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 3,
@@ -589,7 +624,7 @@
           "command": "Rover/camera/camera_streaming",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -603,7 +638,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -728,7 +763,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -744,7 +779,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -828,7 +863,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "",
           "endpointVariable": "$endpoint_variable",
@@ -841,7 +876,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -855,7 +890,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -871,11 +906,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 14,
@@ -895,7 +926,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -908,10 +939,6 @@
       "type": "jaops-telemetricimage-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 1,
@@ -929,17 +956,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -952,7 +974,7 @@
         "commandForms": {
           "drive_straight0": {
             "arguments": {
-              "distance": -2,
+              "distance": 2,
               "linear_velocity": 0.5
             },
             "bgPosition": "center",
@@ -975,7 +997,7 @@
           "command": "/Rover/motor/drive_straight",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -983,14 +1005,9 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 1,
@@ -1008,13 +1025,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1120,7 +1136,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1129,13 +1145,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1241,7 +1256,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1250,17 +1265,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -1284,7 +1294,7 @@
           "command": "/Rover/camera/camera_capture_high",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1292,13 +1302,12 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1411,7 +1420,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1427,11 +1436,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -1472,7 +1477,7 @@
           "command": "Rover/motor/drive_turn",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1480,17 +1485,12 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -1520,7 +1520,7 @@
           "command": "/Rover/motor/drive_straight",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1528,17 +1528,12 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -1578,7 +1573,7 @@
           "command": "Rover/motor/drive_turn",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1586,17 +1581,12 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -1638,7 +1628,7 @@
           "command": "/Rover/camera/camera_capture_depth",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1646,13 +1636,12 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1736,7 +1725,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "",
           "endpointVariable": "$endpoint_variable",
@@ -1749,7 +1738,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1763,7 +1752,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1779,7 +1768,7 @@
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1885,7 +1874,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -1894,13 +1883,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2006,7 +1994,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2015,13 +2003,12 @@
           "type": "plot"
         }
       ],
-      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2078,7 +2065,7 @@
           "customVariableString": false,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2092,10 +2079,6 @@
       "type": "stat"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 1,
@@ -2113,17 +2096,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -2156,7 +2134,7 @@
           "command": "/Rover/motor/drive_straight",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2164,14 +2142,9 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 1,
@@ -2189,17 +2162,12 @@
         "mode": "markdown"
       },
       "pluginVersion": "12.1.1",
-      "title": "",
       "type": "text"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 2,
@@ -2229,7 +2197,7 @@
           "command": "/Lander/camera/lander_camera_capture",
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2237,17 +2205,12 @@
           "type": "commanding"
         }
       ],
-      "title": "",
       "type": "jaops-commanding-panel"
     },
     {
       "datasource": {
         "type": "jaops-yamcs-datasource",
-        "uid": "bfcecar8hnym8c"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+        "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
       },
       "gridPos": {
         "h": 5,
@@ -2277,7 +2240,7 @@
           "asVariable": true,
           "datasource": {
             "type": "jaops-yamcs-datasource",
-            "uid": "bfcecar8hnym8c"
+            "uid": "${DS_JAOPS-YAMCS-DATASOURCE}"
           },
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
@@ -2289,7 +2252,6 @@
       "type": "jaops-commandhistory-panel"
     }
   ],
-  "preload": false,
   "schemaVersion": 41,
   "tags": [],
   "templating": {
@@ -2318,19 +2280,19 @@
       },
       {
         "current": {
-          "text": "/Rover/camera/images_oncommand/url_full_nginx",
-          "value": "/Rover/camera/images_oncommand/url_full_nginx"
+          "text": "/Rover/camera/images_oncommand/url_full",
+          "value": "/Rover/camera/images_oncommand/url_full"
         },
         "hide": 2,
         "name": "oncommand_image_url",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "/Rover/camera/images_oncommand/url_full",
             "value": "/Rover/camera/images_oncommand/url_full"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "/Rover/camera/images_oncommand/url_full_nginx",
             "value": "/Rover/camera/images_oncommand/url_full_nginx"
           }
@@ -2340,19 +2302,19 @@
       },
       {
         "current": {
-          "text": "/Rover/camera/images_streaming/url_full_nginx",
-          "value": "/Rover/camera/images_streaming/url_full_nginx"
+          "text": "/Rover/camera/images_streaming/url_full",
+          "value": "/Rover/camera/images_streaming/url_full"
         },
         "hide": 2,
         "name": "image_streaming",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "/Rover/camera/images_streaming/url_full",
             "value": "/Rover/camera/images_streaming/url_full"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "/Rover/camera/images_streaming/url_full_nginx",
             "value": "/Rover/camera/images_streaming/url_full_nginx"
           }
@@ -2362,19 +2324,19 @@
       },
       {
         "current": {
-          "text": "/Lander/camera/images_oncommand/url_full_nginx",
-          "value": "/Lander/camera/images_oncommand/url_full_nginx"
+          "text": "/Lander/camera/images_oncommand/url_full",
+          "value": "/Lander/camera/images_oncommand/url_full"
         },
         "hide": 2,
         "name": "lander_image",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "/Lander/camera/images_oncommand/url_full",
             "value": "/Lander/camera/images_oncommand/url_full"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "/Lander/camera/images_oncommand/url_full_nginx",
             "value": "/Lander/camera/images_oncommand/url_full_nginx"
           }
@@ -2384,20 +2346,20 @@
       },
       {
         "current": {
-          "text": "/Rover/camera/images_depth/url_full_nginx",
-          "value": "/Rover/camera/images_depth/url_full_nginx"
+          "text": "/Rover/camera/images_depth/url_full",
+          "value": "/Rover/camera/images_depth/url_full"
         },
         "description": "",
         "hide": 2,
         "name": "depth_image",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "/Rover/camera/images_depth/url_full",
             "value": "/Rover/camera/images_depth/url_full"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "/Rover/camera/images_depth/url_full_nginx",
             "value": "/Rover/camera/images_depth/url_full_nginx"
           }
@@ -2415,5 +2377,6 @@
   "timezone": "browser",
   "title": "Workshop - Pilot",
   "uid": "ae4f0ca3-abb5-4a85-b217-539bc61e61d9",
-  "version": 13
+  "version": 1,
+  "weekStart": ""
 }
