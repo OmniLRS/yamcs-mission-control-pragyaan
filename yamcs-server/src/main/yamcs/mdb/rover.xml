@@ -121,16 +121,19 @@ See https://github.com/yamcs/pymdb
         <UnitSet>
           <Unit form="calibrated">deg</Unit>
         </UnitSet>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-180.0" maxInclusive="180.0"/>
       </FloatParameterType>
       <FloatParameterType name="imu_orientation__pitch" sizeInBits="32">
         <UnitSet>
           <Unit form="calibrated">deg</Unit>
         </UnitSet>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-180.0" maxInclusive="180.0"/>
       </FloatParameterType>
       <FloatParameterType name="imu_orientation__yaw" sizeInBits="32">
         <UnitSet>
           <Unit form="calibrated">deg</Unit>
         </UnitSet>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-180.0" maxInclusive="180.0"/>
       </FloatParameterType>
       <ArrayParameterType name="motor_current" arrayTypeRef="motor_current__el">
         <DimensionList>
@@ -148,6 +151,7 @@ See https://github.com/yamcs/pymdb
         <UnitSet>
           <Unit form="calibrated">A</Unit>
         </UnitSet>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="0.0"/>
       </FloatParameterType>
       <ArrayParameterType name="motor_encoder" arrayTypeRef="motor_encoder__el">
         <DimensionList>
@@ -171,6 +175,7 @@ See https://github.com/yamcs/pymdb
         <UnitSet>
           <Unit form="calibrated">counts</Unit>
         </UnitSet>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="0"/>
       </IntegerParameterType>
       <IntegerParameterType name="obc_cpu_usage" signed="false" sizeInBits="8">
         <UnitSet>
@@ -243,10 +248,18 @@ See https://github.com/yamcs/pymdb
           <Member name="z" typeRef="pose_ground_truth__orientation__z" shortDescription="Quaternion Z component"/>
         </MemberList>
       </AggregateParameterType>
-      <FloatParameterType name="pose_ground_truth__orientation__w" sizeInBits="32"/>
-      <FloatParameterType name="pose_ground_truth__orientation__x" sizeInBits="32"/>
-      <FloatParameterType name="pose_ground_truth__orientation__y" sizeInBits="32"/>
-      <FloatParameterType name="pose_ground_truth__orientation__z" sizeInBits="32"/>
+      <FloatParameterType name="pose_ground_truth__orientation__w" sizeInBits="32">
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-1.0" maxInclusive="1.0"/>
+      </FloatParameterType>
+      <FloatParameterType name="pose_ground_truth__orientation__x" sizeInBits="32">
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-1.0" maxInclusive="1.0"/>
+      </FloatParameterType>
+      <FloatParameterType name="pose_ground_truth__orientation__y" sizeInBits="32">
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-1.0" maxInclusive="1.0"/>
+      </FloatParameterType>
+      <FloatParameterType name="pose_ground_truth__orientation__z" sizeInBits="32">
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-1.0" maxInclusive="1.0"/>
+      </FloatParameterType>
       <IntegerParameterType name="radio_rssi" signed="true" sizeInBits="32">
         <UnitSet>
           <Unit form="calibrated">dBm</Unit>
@@ -274,7 +287,7 @@ See https://github.com/yamcs/pymdb
         <UnitSet>
           <Unit form="calibrated">C</Unit>
         </UnitSet>
-        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="0.0"/>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-273.15"/>
       </FloatParameterType>
       <FloatParameterType name="temperature_front" sizeInBits="32">
         <UnitSet>
