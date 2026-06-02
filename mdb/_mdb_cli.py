@@ -2,12 +2,14 @@ import argparse
 import os
 import shutil
 
+ROVER_NAME = "pragyaan"
+
 
 def parse_and_write(system, name: str) -> None:
     """Parse CLI args, write the MDB XML, and optionally deploy it."""
     here = os.path.dirname(os.path.abspath(__file__))
     default_output = f"{here}/../yamcs-server/src/main/yamcs/mdb/{name}.xml"
-    default_deploy = f"{here}/../../OmniLRS/cfg/mdb/pragyaan/{name}.xml"
+    default_deploy = f"{here}/../../OmniLRS/cfg/mdb/{ROVER_NAME}/{name}.xml"
 
     parser = argparse.ArgumentParser(description=f"Generate the {name} MDB XML.")
     parser.add_argument(
