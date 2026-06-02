@@ -1,6 +1,6 @@
-import os
-
 import yamcs.pymdb as MDB
+
+from _mdb_cli import parse_and_write
 
 rover = MDB.System("Rover")
 
@@ -1003,9 +1003,10 @@ power_electronics = MDB.Command(
     short_description="Power on/off electronics subsystems",
 )
 
+# ==================================
+# Generate the Mission Database XML
+# ==================================
 # Emit an XML that conforms to XTCE
 # print(rover.dumps())
-# Save it to yamcs-server source tree (overwriting existing file)
-output_path = f"{os.path.dirname(__file__)}/../yamcs-server/src/main/yamcs/mdb/rover.xml"
-with open(output_path, "wt") as f:
-    rover.dump(f)
+
+parse_and_write(rover, "rover")

@@ -1,6 +1,6 @@
-import os
-
 import yamcs.pymdb as MDB
+
+from _mdb_cli import parse_and_write
 
 lander = MDB.System("Lander")
 
@@ -70,6 +70,8 @@ lander_camera_capture = MDB.Command(
     short_description="Request capture from lander camera",
 )
 
-output_path = f"{os.path.dirname(__file__)}/../yamcs-server/src/main/yamcs/mdb/lander.xml"
-with open(output_path, "wt") as f:
-    lander.dump(f)
+# ==================================
+# Generate the Mission Database XML
+# ==================================
+
+parse_and_write(lander, "lander")
