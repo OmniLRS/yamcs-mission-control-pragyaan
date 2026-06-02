@@ -40,7 +40,8 @@ python3 mdb/generate_mdb_rover.py
 python3 mdb/generate_mdb_lander.py
 python3 mdb/generate_mdb_admin.py
 ```
-Outputs the XTCE XML files to `yamcs-server/src/main/yamcs/mdb/`.
+Outputs the XTCE XML files to `yamcs-server/src/main/yamcs/mdb/` for Yamcs to load them (the Ground Segment).
+Also copies the files to the OmniLRS rover simulation (the Space Segment) to make sure that always stay in sync.
 
 2. Run the Yamcs Server
 
