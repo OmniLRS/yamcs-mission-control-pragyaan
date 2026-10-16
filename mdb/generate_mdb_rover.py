@@ -409,6 +409,46 @@ images_streaming_state = MDB.EnumeratedParameter(
     short_description="Streaming pipeline state",
 )
 
+images_streaming_bandwidth = MDB.FloatParameter(
+    system=images_streaming_subsystem,
+    name="bandwidth",
+    bits=32,
+    minimum=0.0,
+    data_source=MDB.DataSource.LOCAL,
+    short_description="Rolling encoded H.264 bitrate of the streaming camera",
+    units="bit/s",
+)
+
+images_streaming_packets_sent = MDB.IntegerParameter(
+    system=images_streaming_subsystem,
+    name="packets_sent",
+    signed=False,
+    bits=32,
+    data_source=MDB.DataSource.LOCAL,
+    short_description="Cumulative streaming packets sent",
+    units="counts",
+)
+
+images_streaming_packets_lost = MDB.IntegerParameter(
+    system=images_streaming_subsystem,
+    name="packets_lost",
+    signed=False,
+    bits=32,
+    data_source=MDB.DataSource.LOCAL,
+    short_description="Cumulative streaming packets lost",
+    units="counts",
+)
+
+images_streaming_decode_errors = MDB.IntegerParameter(
+    system=images_streaming_subsystem,
+    name="decode_errors",
+    signed=False,
+    bits=32,
+    data_source=MDB.DataSource.LOCAL,
+    short_description="Cumulative streaming H.264 decode errors",
+    units="counts",
+)
+
 # Camera APXS image metadata
 images_apxs_url_storage = MDB.StringParameter(
     system=images_apxs_subsystem,
