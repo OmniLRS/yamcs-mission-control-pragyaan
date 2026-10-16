@@ -934,6 +934,126 @@ camera_capture_depth = MDB.Command(
     short_description="Capture a depth image",
 )
 
+# Camera streaming compression parameters (same as camera_compression in pragyaan-controller.yaml)
+
+bitrate_arg = MDB.IntegerArgument(
+    name="bitrate",
+    signed=False,
+    bits=32,
+    minimum=1,
+    units="bit/s",
+    short_description="Target bitrate, used only when crf is not set",
+    encoding=MDB.IntegerEncoding(bits=32, scheme=MDB.IntegerEncodingScheme.UNSIGNED),
+)
+
+crf_arg = MDB.IntegerArgument(
+    name="crf",
+    signed=True,
+    bits=8,
+    minimum=-1,
+    maximum=51,
+    short_description="Constant rate factor 0-51 (lower is higher quality), -1 to use the bitrate instead",
+    encoding=MDB.IntegerEncoding(bits=8, scheme=MDB.IntegerEncodingScheme.TWOS_COMPLEMENT),
+)
+
+keyframe_interval_arg = MDB.IntegerArgument(
+    name="keyframe_interval",
+    signed=False,
+    bits=16,
+    minimum=1,
+    units="frames",
+    short_description="Number of frames between keyframes",
+    encoding=MDB.IntegerEncoding(bits=16, scheme=MDB.IntegerEncodingScheme.UNSIGNED),
+)
+
+max_payload_size_arg = MDB.IntegerArgument(
+    name="max_payload_size",
+    signed=False,
+    bits=16,
+    minimum=1,
+    units="bytes",
+    short_description="Maximum payload size of one transport packet",
+    encoding=MDB.IntegerEncoding(bits=16, scheme=MDB.IntegerEncodingScheme.UNSIGNED),
+)
+
+loss_probability_arg = MDB.FloatArgument(
+    name="loss_probability",
+    bits=32,
+    minimum=0.0,
+    maximum=1.0,
+    short_description="Probability of dropping each transport packet",
+    encoding=MDB.FloatEncoding(bits=32),
+)
+
+seed_arg = MDB.IntegerArgument(
+    name="seed",
+    signed=True,
+    bits=32,
+    minimum=-1,
+    short_description="Seed for reproducible packet loss, -1 for a random seed",
+    encoding=MDB.IntegerEncoding(bits=32, scheme=MDB.IntegerEncodingScheme.TWOS_COMPLEMENT),
+)
+
+bandwidth_window_seconds_arg = MDB.FloatArgument(
+    name="bandwidth_window_seconds",
+    bits=32,
+    minimum=0.0,
+    minimum_inclusive=False,
+    units="s",
+    short_description="Duration of the rolling bandwidth measurement window",
+    encoding=MDB.FloatEncoding(bits=32),
+)
+
+set_camera_streaming_params = MDB.Command(
+    system=camera_subsystem,
+    name="set_camera_streaming_params",
+    arguments=[
+        bitrate_arg,
+        crf_arg,
+        keyframe_interval_arg,
+        max_payload_size_arg,
+        loss_probability_arg,
+        seed_arg,
+        bandwidth_window_seconds_arg,
+    ],
+    entries=[
+        MDB.FixedValueEntry(
+            name="command_name",
+            binary=b"set_camera_streaming_params",
+            short_description="Command name identifier",
+        ),
+        MDB.ArgumentEntry(
+            argument=bitrate_arg,
+            short_description="Bitrate argument",
+        ),
+        MDB.ArgumentEntry(
+            argument=crf_arg,
+            short_description="CRF argument",
+        ),
+        MDB.ArgumentEntry(
+            argument=keyframe_interval_arg,
+            short_description="Keyframe interval argument",
+        ),
+        MDB.ArgumentEntry(
+            argument=max_payload_size_arg,
+            short_description="Maximum payload size argument",
+        ),
+        MDB.ArgumentEntry(
+            argument=loss_probability_arg,
+            short_description="Loss probability argument",
+        ),
+        MDB.ArgumentEntry(
+            argument=seed_arg,
+            short_description="Seed argument",
+        ),
+        MDB.ArgumentEntry(
+            argument=bandwidth_window_seconds_arg,
+            short_description="Bandwidth window argument",
+        ),
+    ],
+    short_description="Set the camera streaming compression and packet loss parameters",
+)
+
 # Camera settings: single config file path argument
 config_path_arg = MDB.StringArgument(
     name="config_path",
