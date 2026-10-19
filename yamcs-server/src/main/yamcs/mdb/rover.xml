@@ -670,12 +670,12 @@ See https://docs.yamcs.org/pymdb/
     <SpaceSystem name="images_streaming" shortDescription="Streaming capture metadata">
       <TelemetryMetaData>
         <ParameterTypeSet>
-          <FloatParameterType name="bandwidth" sizeInBits="32">
+          <IntegerParameterType name="bandwidth" signed="true" sizeInBits="32">
             <UnitSet>
               <Unit form="calibrated">bit/s</Unit>
             </UnitSet>
-            <ValidRange validRangeAppliesToCalibrated="true" minInclusive="0.0"/>
-          </FloatParameterType>
+            <ValidRange validRangeAppliesToCalibrated="true" minInclusive="1000"/>
+          </IntegerParameterType>
           <IntegerParameterType name="decode_errors" signed="false" sizeInBits="32">
             <UnitSet>
               <Unit form="calibrated">counts</Unit>

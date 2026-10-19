@@ -409,11 +409,11 @@ images_streaming_state = MDB.EnumeratedParameter(
     short_description="Streaming pipeline state",
 )
 
-images_streaming_bandwidth = MDB.FloatParameter(
+images_streaming_bandwidth = MDB.IntegerParameter(
     system=images_streaming_subsystem,
     name="bandwidth",
     bits=32,
-    minimum=0.0,
+    minimum=1000,
     data_source=MDB.DataSource.LOCAL,
     short_description="Rolling encoded H.264 bitrate of the streaming camera",
     units="bit/s",
@@ -981,11 +981,12 @@ max_payload_size_arg = MDB.IntegerArgument(
 )
 
 # TODO: add a maximum; a huge window makes OmniLRS raise OverflowError when sizing its per-frame buffer.
+# The 0.0 minimum is exclusive (0 is rejected), but the Yamcs web UI displays it as inclusive: [0, +inf).
 bandwidth_window_seconds_arg = MDB.FloatArgument(
     name="bandwidth_window_seconds",
     bits=32,
     minimum=0.0,
-    minimum_inclusive=False, # The minimum value is exclusive but in the yamcs display it seems like included (but you can't select it)
+    minimum_inclusive=False,
     units="s",
     short_description="Duration of the rolling bandwidth measurement window",
     encoding=MDB.FloatEncoding(bits=32),
