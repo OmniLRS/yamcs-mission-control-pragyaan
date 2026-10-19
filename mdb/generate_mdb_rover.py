@@ -419,11 +419,13 @@ images_streaming_bandwidth = MDB.FloatParameter(
     units="bit/s",
 )
 
+# TODO: cumulative counters overflow 16 bits after ~70 min at 150 kbit/s with 1200-byte payloads; widen to 32 bits or
+# have OmniLRS wrap them (see transmit_camera_compression_info in OmniLRS).
 images_streaming_packets_sent = MDB.IntegerParameter(
     system=images_streaming_subsystem,
     name="packets_sent",
     signed=False,
-    bits=32,
+    bits=16,
     data_source=MDB.DataSource.LOCAL,
     short_description="Cumulative streaming packets sent",
     units="counts",
@@ -433,7 +435,7 @@ images_streaming_packets_lost = MDB.IntegerParameter(
     system=images_streaming_subsystem,
     name="packets_lost",
     signed=False,
-    bits=32,
+    bits=16,
     data_source=MDB.DataSource.LOCAL,
     short_description="Cumulative streaming packets lost",
     units="counts",
@@ -940,7 +942,7 @@ bitrate_arg = MDB.IntegerArgument(
     name="bitrate",
     signed=False,
     bits=32,
-    minimum=1,
+    minimum=1000,
     units="bit/s",
     short_description="Target bitrate, used only when crf is not set",
     encoding=MDB.IntegerEncoding(bits=32, scheme=MDB.IntegerEncodingScheme.UNSIGNED),
@@ -959,11 +961,12 @@ crf_arg = MDB.IntegerArgument(
 keyframe_interval_arg = MDB.IntegerArgument(
     name="keyframe_interval",
     signed=False,
-    bits=16,
+    bits=8,
     minimum=1,
+    maximum=255,
     units="frames",
     short_description="Number of frames between keyframes",
-    encoding=MDB.IntegerEncoding(bits=16, scheme=MDB.IntegerEncodingScheme.UNSIGNED),
+    encoding=MDB.IntegerEncoding(bits=8, scheme=MDB.IntegerEncodingScheme.UNSIGNED),
 )
 
 max_payload_size_arg = MDB.IntegerArgument(
@@ -971,34 +974,18 @@ max_payload_size_arg = MDB.IntegerArgument(
     signed=False,
     bits=16,
     minimum=1,
+    maximum=65535,
     units="bytes",
     short_description="Maximum payload size of one transport packet",
     encoding=MDB.IntegerEncoding(bits=16, scheme=MDB.IntegerEncodingScheme.UNSIGNED),
 )
 
-loss_probability_arg = MDB.FloatArgument(
-    name="loss_probability",
-    bits=32,
-    minimum=0.0,
-    maximum=1.0,
-    short_description="Probability of dropping each transport packet",
-    encoding=MDB.FloatEncoding(bits=32),
-)
-
-seed_arg = MDB.IntegerArgument(
-    name="seed",
-    signed=True,
-    bits=32,
-    minimum=-1,
-    short_description="Seed for reproducible packet loss, -1 for a random seed",
-    encoding=MDB.IntegerEncoding(bits=32, scheme=MDB.IntegerEncodingScheme.TWOS_COMPLEMENT),
-)
-
+# TODO: add a maximum; a huge window makes OmniLRS raise OverflowError when sizing its per-frame buffer.
 bandwidth_window_seconds_arg = MDB.FloatArgument(
     name="bandwidth_window_seconds",
     bits=32,
     minimum=0.0,
-    minimum_inclusive=False,
+    minimum_inclusive=False, # The minimum value is exclusive but in the yamcs display it seems like included (but you can't select it)
     units="s",
     short_description="Duration of the rolling bandwidth measurement window",
     encoding=MDB.FloatEncoding(bits=32),
@@ -1012,8 +999,6 @@ set_camera_streaming_params = MDB.Command(
         crf_arg,
         keyframe_interval_arg,
         max_payload_size_arg,
-        loss_probability_arg,
-        seed_arg,
         bandwidth_window_seconds_arg,
     ],
     entries=[
@@ -1039,19 +1024,11 @@ set_camera_streaming_params = MDB.Command(
             short_description="Maximum payload size argument",
         ),
         MDB.ArgumentEntry(
-            argument=loss_probability_arg,
-            short_description="Loss probability argument",
-        ),
-        MDB.ArgumentEntry(
-            argument=seed_arg,
-            short_description="Seed argument",
-        ),
-        MDB.ArgumentEntry(
             argument=bandwidth_window_seconds_arg,
             short_description="Bandwidth window argument",
         ),
     ],
-    short_description="Set the camera streaming compression and packet loss parameters",
+    short_description="Set the camera streaming compression parameters",
 )
 
 # Camera settings: single config file path argument
