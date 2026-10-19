@@ -419,15 +419,15 @@ images_streaming_bandwidth = MDB.IntegerParameter(
     units="bit/s",
 )
 
-# TODO: cumulative counters overflow 16 bits after ~70 min at 150 kbit/s with 1200-byte payloads; widen to 32 bits or
-# have OmniLRS wrap them (see transmit_camera_compression_info in OmniLRS).
+# Cumulative 16-bit counters: OmniLRS wraps them from 65535 back to 0 like hardware counters
+# (see transmit_camera_compression_info in OmniLRS).
 images_streaming_packets_sent = MDB.IntegerParameter(
     system=images_streaming_subsystem,
     name="packets_sent",
     signed=False,
     bits=16,
     data_source=MDB.DataSource.LOCAL,
-    short_description="Cumulative streaming packets sent",
+    short_description="Cumulative streaming packets sent, wraps to 0 after 65535",
     units="counts",
 )
 
@@ -437,7 +437,7 @@ images_streaming_packets_lost = MDB.IntegerParameter(
     signed=False,
     bits=16,
     data_source=MDB.DataSource.LOCAL,
-    short_description="Cumulative streaming packets lost",
+    short_description="Cumulative streaming packets lost, wraps to 0 after 65535",
     units="counts",
 )
 
