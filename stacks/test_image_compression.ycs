@@ -1,0 +1,194 @@
+{
+  "advancement": {
+    "acknowledgment": "Acknowledge_Sent",
+    "wait": 500
+  },
+  "steps": [
+    {
+      "type": "command",
+      "name": "/Rover/system/go_nogo_command",
+      "arguments": [
+        { "name": "decision", "value": "GO" }
+      ],
+      "comment": "Give a GO (needed to drive)"
+    },
+    {
+      "type": "verify",
+      "comment": "Simulator is up and answering commands",
+      "condition": [
+        { "parameter": "/Rover/go_nogo", "operator": "eq", "value": "GO" }
+      ],
+      "delay": 0,
+      "timeout": 60000
+    },
+    {
+      "type": "command",
+      "name": "/Rover/power/power_electronics",
+      "arguments": [
+        { "name": "subsystem_id", "value": "MOTOR_CONTROLLER" },
+        { "name": "power_state", "value": "ON" }
+      ],
+      "comment": "Power the motor controller (needed to drive)"
+    },
+    {
+      "type": "command",
+      "name": "/Rover/power/power_electronics",
+      "arguments": [
+        { "name": "subsystem_id", "value": "CAMERA" },
+        { "name": "power_state", "value": "ON" }
+      ],
+      "comment": "Power the camera (starts the stream)"
+    },
+    {
+      "type": "verify",
+      "comment": "Streaming is ON",
+      "condition": [
+        { "parameter": "/Rover/camera/images_streaming/state", "operator": "eq", "value": "ON" }
+      ],
+      "delay": 0,
+      "timeout": 15000
+    },
+
+    {
+      "type": "command",
+      "name": "/Rover/camera/set_camera_streaming_params",
+      "arguments": [
+        { "name": "bitrate", "value": "100000" },
+        { "name": "crf", "value": "-1" },
+        { "name": "keyframe_interval", "value": "30" },
+        { "name": "max_payload_size", "value": "1200" },
+        { "name": "bandwidth_window_seconds", "value": "1.0" }
+      ],
+      "comment": "Static scene, 100 kbit/s",
+      "advancement": { "acknowledgment": "Acknowledge_Sent", "wait": 8000 }
+    },
+    {
+      "type": "check",
+      "comment": "100 kbit/s, rover standing",
+      "parameters": [
+        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
+        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
+        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
+        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+      ]
+    },
+    {
+      "type": "command",
+      "name": "/Rover/camera/set_camera_streaming_params",
+      "arguments": [
+        { "name": "bitrate", "value": "2000000" },
+        { "name": "crf", "value": "-1" },
+        { "name": "keyframe_interval", "value": "30" },
+        { "name": "max_payload_size", "value": "1200" },
+        { "name": "bandwidth_window_seconds", "value": "1.0" }
+      ],
+      "comment": "Static scene, 2 Mbit/s",
+      "advancement": { "acknowledgment": "Acknowledge_Sent", "wait": 8000 }
+    },
+    {
+      "type": "check",
+      "comment": "2 Mbit/s, rover standing: bandwidth should be higher than at 100 kbit/s",
+      "parameters": [
+        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
+        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
+        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
+        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+      ]
+    },
+    {
+      "type": "command",
+      "name": "/Rover/camera/set_camera_streaming_params",
+      "arguments": [
+        { "name": "bitrate", "value": "500000" },
+        { "name": "crf", "value": "30" },
+        { "name": "keyframe_interval", "value": "30" },
+        { "name": "max_payload_size", "value": "1200" },
+        { "name": "bandwidth_window_seconds", "value": "1.0" }
+      ],
+      "comment": "Constant quality, crf 30 (bitrate is ignored)",
+      "advancement": { "acknowledgment": "Acknowledge_Sent", "wait": 8000 }
+    },
+    {
+      "type": "check",
+      "comment": "crf 30, rover standing",
+      "parameters": [
+        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
+        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
+        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
+        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+      ]
+    },
+
+    {
+      "type": "check",
+      "comment": "Pose before driving",
+      "parameters": [
+        { "parameter": "/Rover/pose_ground_truth.position.x" },
+        { "parameter": "/Rover/pose_ground_truth.position.y" },
+        { "parameter": "/Rover/imu_orientation.yaw" }
+      ]
+    },
+    {
+      "type": "command",
+      "name": "/Rover/motor/drive_straight",
+      "arguments": [
+        { "name": "linear_velocity", "value": "0.5" },
+        { "name": "distance", "value": "2.0" }
+      ],
+      "comment": "Drive straight 2 m at 0.5 m/s",
+      "advancement": { "acknowledgment": "Acknowledge_Sent", "wait": 6000 }
+    },
+    {
+      "type": "check",
+      "comment": "After driving: position moved by about 2 m. Compare bandwidth with the standing reading at crf 30",
+      "parameters": [
+        { "parameter": "/Rover/pose_ground_truth.position.x" },
+        { "parameter": "/Rover/pose_ground_truth.position.y" },
+        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
+        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
+        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
+        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+      ]
+    },
+    {
+      "type": "command",
+      "name": "/Rover/motor/drive_turn",
+      "arguments": [
+        { "name": "angular_velocity", "value": "10.0" },
+        { "name": "angle", "value": "90.0" }
+      ],
+      "comment": "Turn 90 deg at 10 deg/s",
+      "advancement": { "acknowledgment": "Acknowledge_Sent", "wait": 11000 }
+    },
+    {
+      "type": "check",
+      "comment": "After turning: yaw changed by about 90 deg",
+      "parameters": [
+        { "parameter": "/Rover/imu_orientation.yaw" },
+        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
+        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
+        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
+        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+      ]
+    },
+
+    {
+      "type": "command",
+      "name": "/Rover/power/power_electronics",
+      "arguments": [
+        { "name": "subsystem_id", "value": "CAMERA" },
+        { "name": "power_state", "value": "OFF" }
+      ],
+      "comment": "Power off the camera (stops the stream)"
+    },
+    {
+      "type": "command",
+      "name": "/Rover/power/power_electronics",
+      "arguments": [
+        { "name": "subsystem_id", "value": "MOTOR_CONTROLLER" },
+        { "name": "power_state", "value": "OFF" }
+      ],
+      "comment": "Power off the motor controller"
+    }
+  ]
+}
