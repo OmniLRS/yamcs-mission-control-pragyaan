@@ -1,13 +1,15 @@
 import argparse
 import yaml
 import yamcs.pymdb as MDB
+import os
 
 from _mdb_cli import parse_and_write
 
 
 def parse_cameras_conf(robot_name):
     # extract cameras in .yaml config 
-    with open(f"./cfg/{robot_name}.yaml", "r", encoding="utf-8") as f:
+    here = os.path.dirname(os.path.abspath(__file__))
+    with open(f"{here}/cfg/{robot_name}.yaml", "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
     return config["robots_settings"]["parameters"].get("camera", []) # may not have cameras
