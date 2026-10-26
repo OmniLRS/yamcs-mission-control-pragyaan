@@ -1,0 +1,47 @@
+# @package environment
+# do not remove the above comment, it injects the settings below into the environment config
+
+robots_settings:
+  parameters:
+    robot_name: pragyaan
+    usd_path: assets/USD_Assets/robots/pragyaan/nograph_pragyaan.usd
+    pose:
+      position: [26., 16.6, 0.8] # Lunaryard, LargeScale
+      # position: [5.0, 5.0, 0.1] # Lunalab
+      orientation: [0., 0., 0.70711, 0.70711]
+      height_above_terrain_override: 0.8 # optional, replaces position z with terrain height at (x, y) + this value
+    base_link: "base_link" # core link used to determine the position of the robot
+    pos_relative_to_prim: "/StaticAssets/lander"  # if no lander in environment, rover position will be reported in world frame and a warning will be printed at initialization
+    target_links: [
+      "Mobility/Wheel_front_left",
+      "Mobility/Wheel_front_right",
+      "Mobility/Wheel_middle_left",
+      "Mobility/Wheel_middle_right",
+      "Mobility/Wheel_back_left",
+      "Mobility/Wheel_back_right"
+    ]
+    wheel_joints:
+      left: ["wheel_fl", "wheel_ml", "wheel_bl"]
+      right: ["wheel_fr", "wheel_mr", "wheel_br"]
+    dimensions:
+      width: 1.6 # m
+      length: 1.5
+    turn_speed_coef: 19
+    camera:
+      - name: "cam_depth"
+        prim_path: "/Robots/pragyaan/Body/body_main/depth_cam"
+        resolutions:
+          low: [640, 480]
+          high: [1440, 1080]
+      - name: "NavCam_left"
+        prim_path: "/Robots/pragyaan/Body/NavCam_left/NavCam_left"
+        resolutions:
+          low: [640, 480]
+          high: [1440, 1080]
+      - name: "NavCam_right"
+        prim_path: "/Robots/pragyaan/Body/NavCam_right/NavCam_right"
+        resolutions:
+          low: [640, 480]
+          high: [1440, 1080]
+    imu_sensor_path: "/Robots/pragyaan/base_link/Imu_Sensor"
+    solar_panel_joint: "solarJoint"  # finds it within the main robot articulation
