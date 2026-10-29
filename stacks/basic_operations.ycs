@@ -1,0 +1,114 @@
+{
+  "advancement": {
+    "acknowledgment": "Acknowledge_Sent",
+    "wait": 500
+  },
+  "steps": [
+    {
+      "type": "command",
+      "name": "/Rover/system/go_nogo_command",
+      "arguments": [
+        { "name": "decision", "value": "GO" }
+      ],
+      "comment": "GO (required to drive)"
+    },
+    {
+      "type": "verify",
+      "comment": "Rover is GO",
+      "condition": [
+        { "parameter": "/Rover/go_nogo", "operator": "eq", "value": "GO" }
+      ],
+      "delay": 0,
+      "timeout": 60000
+    },
+    {
+      "type": "command",
+      "name": "/Rover/system/deploy_solar_panel",
+      "arguments": [
+        { "name": "deployment", "value": "DEPLOY" }
+      ],
+      "comment": "Deploy the solar panel"
+    },
+    {
+      "type": "verify",
+      "comment": "Solar panel is deployed",
+      "condition": [
+        { "parameter": "/Rover/solar_panel_state", "operator": "eq", "value": "DEPLOYED" }
+      ],
+      "delay": 0,
+      "timeout": 15000
+    },
+    {
+      "type": "command",
+      "name": "/Rover/power/power_electronics",
+      "arguments": [
+        { "name": "subsystem_id", "value": "CAMERA" },
+        { "name": "power_state", "value": "ON" }
+      ],
+      "comment": "Power on the camera (starts the stream)"
+    },
+    {
+      "type": "verify",
+      "comment": "Camera stream is ON",
+      "condition": [
+        { "parameter": "/Rover/camera/images_streaming/state", "operator": "eq", "value": "ON" }
+      ],
+      "delay": 0,
+      "timeout": 15000
+    },
+    {
+      "type": "command",
+      "name": "/Rover/power/power_electronics",
+      "arguments": [
+        { "name": "subsystem_id", "value": "MOTOR_CONTROLLER" },
+        { "name": "power_state", "value": "ON" }
+      ],
+      "comment": "Power on the motor controller (required to drive)"
+    },
+    {
+      "type": "check",
+      "comment": "Pose before driving",
+      "parameters": [
+        { "parameter": "/Rover/pose_ground_truth.position.x" },
+        { "parameter": "/Rover/pose_ground_truth.position.y" },
+        { "parameter": "/Rover/imu_orientation.yaw" }
+      ]
+    },
+    {
+      "type": "command",
+      "name": "/Rover/motor/drive_straight",
+      "arguments": [
+        { "name": "linear_velocity", "value": "0.2" },
+        { "name": "distance", "value": "1.0" }
+      ],
+      "comment": "Drive straight 1 m at 0.2 m/s (about 5 s)",
+      "advancement": { "acknowledgment": "Acknowledge_Sent", "wait": 7000 }
+    },
+    {
+      "type": "check",
+      "comment": "After driving: position moved by about 1 m",
+      "parameters": [
+        { "parameter": "/Rover/pose_ground_truth.position.x" },
+        { "parameter": "/Rover/pose_ground_truth.position.y" },
+        { "parameter": "/Rover/imu_orientation.yaw" }
+      ]
+    },
+    {
+      "type": "command",
+      "name": "/Rover/motor/drive_turn",
+      "arguments": [
+        { "name": "angular_velocity", "value": "10.0" },
+        { "name": "angle", "value": "90.0" }
+      ],
+      "comment": "Turn 90 deg left at 10 deg/s (positive angular velocity = left, about 9 s)",
+      "advancement": { "acknowledgment": "Acknowledge_Sent", "wait": 11000 }
+    },
+    {
+      "type": "check",
+      "comment": "After turning: yaw changed by about +90 deg",
+      "parameters": [
+        { "parameter": "/Rover/imu_orientation.yaw" }
+      ]
+    }
+  ]
+}
