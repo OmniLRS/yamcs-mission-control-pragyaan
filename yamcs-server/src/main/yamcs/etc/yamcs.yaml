@@ -22,6 +22,10 @@ instances:
 secretKey: changeme
 
 buckets:
+  # Command stacks shown in Yamcs Web (its default stack bucket is 'stacks').
+  # Relative to the run directory (target/yamcs), so stacks saved from Yamcs Web land in the repo.
+  - name: stacks
+    path: ../../src/main/yamcs/stacks
   - name: images_streaming
     path: /tmp/images_streaming
   - name: images_oncommand
