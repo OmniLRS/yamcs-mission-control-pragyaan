@@ -1,6 +1,6 @@
 import yamcs.pymdb as MDB
 
-from _mdb_cli import parse_and_write
+from _mdb_cli import write_mdb
 
 lander = MDB.System("Lander")
 
@@ -74,4 +74,4 @@ lander_camera_capture = MDB.Command(
 # Generate the Mission Database XML
 # ==================================
 
-parse_and_write(lander, "lander")
+write_mdb(lander, "lander")

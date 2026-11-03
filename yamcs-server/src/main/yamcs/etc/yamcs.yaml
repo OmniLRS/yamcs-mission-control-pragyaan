@@ -21,21 +21,9 @@ instances:
 # This is used to provide cryptographic signing.
 secretKey: changeme
 
+# Image buckets are not declared here: OmniLRS creates the buckets it uploads to through the storage API at startup.
 buckets:
   # Command stacks shown in Yamcs Web (its default stack bucket is 'stacks').
   # Relative to the run directory (target/yamcs), so stacks saved from Yamcs Web land in the repo.
   - name: stacks
     path: ../../src/main/yamcs/stacks
-  - name: images_streaming
-    path: /tmp/images_streaming
-  - name: images_oncommand
-    path: /tmp/images_oncommand
-  - name: images_depth
-    path: /tmp/images_depth
-  - name: images_lander
-    path: /tmp/images_lander
-  - name: images_apxs
-    path: /tmp/images_apxs
-  - name: images_monitoring
-    path: /tmp/images_monitoring
-

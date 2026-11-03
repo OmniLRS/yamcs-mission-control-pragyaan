@@ -1,6 +1,6 @@
 import yamcs.pymdb as MDB
 
-from _mdb_cli import parse_and_write
+from _mdb_cli import write_mdb
 
 admin_system = MDB.System("Admin")
 
@@ -133,4 +133,4 @@ admin_set_battery_percentage = MDB.Command(
 # Generate the Mission Database XML
 # ==================================
 
-parse_and_write(admin_system, "admin")
+write_mdb(admin_system, "admin")
