@@ -43,12 +43,6 @@ def camera_arg(cmd_name, data, cmd_name_len):
     return naming.cameras_for_command(cameras, cmd_name.decode())[data[cmd_name_len]]
 
 
-def create_buckets(storage):
-    camera_buckets = [bucket for _, _, bucket, _ in naming.camera_buckets(cameras)]
-    for name in camera_buckets + [LANDER_BUCKET["name"], APXS_BUCKET["name"]]:
-        storage.get_bucket(name, create=True)
-
-
 def seed_apxs_image(processor, storage):
     """Create and publish a default APXS image for sequence 0."""
     image_name = "image_apxs_0000.png"
@@ -126,9 +120,7 @@ def handle_command(processor, storage, command_counts, cmd_name, cmd_name_len, d
 def main():
     client = YamcsClient(YAMCS_HOST)
     processor = client.get_processor(instance=YAMCS_INSTANCE, processor=YAMCS_PROCESSOR)
-    storage = client.get_storage_client()
-
-    create_buckets(storage)
+    storage = client.get_storage_client()  # the image buckets are declared in yamcs.yaml (mdb/generate_mdb_rover.py)
 
     tc_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     tc_socket.bind((TC_RECEIVE_ADDRESS, TC_RECEIVE_PORT))

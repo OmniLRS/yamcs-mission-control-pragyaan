@@ -699,11 +699,10 @@ See https://docs.yamcs.org/pymdb/
       <SpaceSystem name="streaming" shortDescription="NavCam_left streaming image metadata and stream telemetry">
         <TelemetryMetaData>
           <ParameterTypeSet>
-            <IntegerParameterType name="bandwidth" signed="true" sizeInBits="32">
+            <IntegerParameterType name="bandwidth" signed="false" sizeInBits="32">
               <UnitSet>
                 <Unit form="calibrated">bit/s</Unit>
               </UnitSet>
-              <ValidRange validRangeAppliesToCalibrated="true" minInclusive="1000"/>
             </IntegerParameterType>
             <IntegerParameterType name="decode_errors" signed="false" sizeInBits="32">
               <UnitSet>
@@ -803,11 +802,10 @@ See https://docs.yamcs.org/pymdb/
       <SpaceSystem name="streaming" shortDescription="NavCam_right streaming image metadata and stream telemetry">
         <TelemetryMetaData>
           <ParameterTypeSet>
-            <IntegerParameterType name="bandwidth" signed="true" sizeInBits="32">
+            <IntegerParameterType name="bandwidth" signed="false" sizeInBits="32">
               <UnitSet>
                 <Unit form="calibrated">bit/s</Unit>
               </UnitSet>
-              <ValidRange validRangeAppliesToCalibrated="true" minInclusive="1000"/>
             </IntegerParameterType>
             <IntegerParameterType name="decode_errors" signed="false" sizeInBits="32">
               <UnitSet>

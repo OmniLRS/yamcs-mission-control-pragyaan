@@ -48,7 +48,7 @@ Outputs the XTCE XML files to `yamcs-server/src/main/yamcs/mdb/` for Yamcs to lo
 Nothing is copied to OmniLRS: at startup the OmniLRS rover simulation (the Space Segment) fetches the MDB from the running Yamcs server and checks its cameras, telemetry and commands against it.
 Yamcs loads the MDB when the instance starts, so restart Yamcs after regenerating.
 
-The camera image buckets (`images_<camera>_<kind>`), as well as the lander, monitoring and APXS buckets, are created through the Yamcs storage API by OmniLRS (or the image mocks below) at startup; `yamcs.yaml` only declares the `stacks` bucket.
+The rover generator also writes the image buckets into `yamcs-server/src/main/yamcs/etc/yamcs.yaml`: one per camera and kind (`images_<camera>_<kind>`) plus the lander, monitoring and APXS buckets of the OmniLRS controller yaml. They are filesystem buckets (one directory of PNG files each, under `target/yamcs/images/`) with limits sized to keep every image of a mission (100 GiB and 1,000,000 objects per bucket; Yamcs' default is 100 MB and 1000). Directory and limits are set in `mdb/_mdb_cli.py`. OmniLRS uploads into them and checks at startup that they exist; the rest of `yamcs.yaml` (comments included) is left as is.
 
 2. Run the Yamcs Server
 

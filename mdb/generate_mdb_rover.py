@@ -2,8 +2,8 @@ import argparse
 
 import yamcs.pymdb as MDB
 
-from _mdb_cli import write_mdb
-from _omnilrs import ROBOT_NAME, load_cameras, load_naming, omnilrs_root
+from _mdb_cli import write_image_buckets, write_mdb
+from _omnilrs import ROBOT_NAME, load_cameras, load_naming, load_yamcs_tmtc, omnilrs_root
 
 parser = argparse.ArgumentParser(description="Generate the rover MDB XML from the OmniLRS robot definition.")
 parser.add_argument(
@@ -336,12 +336,13 @@ def streaming_parameter(system, name, camera):
             data_source=MDB.DataSource.LOCAL,
             short_description=f"{camera} streaming pipeline state",
         )
+    # 0 is valid: OmniLRS sends the bandwidth from startup, and it stays 0 until the first frame is encoded.
     if name == "bandwidth":
         return MDB.IntegerParameter(
             system=system,
             name=name,
+            signed=False,
             bits=32,
-            minimum=1000,
             data_source=MDB.DataSource.LOCAL,
             short_description=f"Rolling encoded H.264 bitrate of the {camera} stream",
             units="bit/s",
@@ -1129,3 +1130,12 @@ power_electronics = MDB.Command(
 # print(rover.dumps())
 
 write_mdb(rover, "rover")
+
+# ==================================
+# Image buckets (etc/yamcs.yaml)
+# ==================================
+# Every bucket OmniLRS uploads images to: the cameras' buckets and the role and payload buckets of the controller yaml
+write_image_buckets(
+    [name for name, _ in naming.image_buckets(cameras, load_yamcs_tmtc(root))],
+    prefix=naming.BUCKET_PREFIX,
+)

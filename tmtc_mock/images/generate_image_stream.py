@@ -19,10 +19,7 @@ streaming_cameras = [cam["name"] for cam in cameras if naming.has_type(cam, "rgb
 
 client = YamcsClient(YAMCS_HOST)
 processor = client.get_processor(instance=YAMCS_INSTANCE, processor=YAMCS_PROCESSOR)
-storage = client.get_storage_client()
-
-for camera in streaming_cameras:
-    storage.get_bucket(naming.bucket_name(camera, "streaming"), create=True)
+storage = client.get_storage_client()  # the image buckets are declared in yamcs.yaml (mdb/generate_mdb_rover.py)
 
 n = 1
 while True:
