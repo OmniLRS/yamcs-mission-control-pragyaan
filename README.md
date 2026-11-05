@@ -36,8 +36,8 @@ pip3 install -r requirements.txt
 
 1. (re)generate the Mission DataBase
 
-The rover cameras are defined in OmniLRS (`cfg/robot/pragyaan.yaml`), and the rule that maps them to MDB paths and storage buckets lives in OmniLRS `src/tmtc/yamcs_naming.py`.
-The rover generator reads both from an OmniLRS checkout given by `OMNILRS_ROOT` (or `--omnilrs-root`):
+The rover cameras are defined in OmniLRS (`cfg/robot/pragyaan.yaml`), the image buckets in its controller yaml (`cfg/controller/pragyaan-controller.yaml`), the streaming telemetry fields in `src/mission_specific/pragyaan/tmtc/enums.py`, and the rule that maps them to MDB paths and storage buckets lives in OmniLRS `src/tmtc/yamcs_naming.py`.
+The rover generator reads them from an OmniLRS checkout given by `OMNILRS_ROOT` (or `--omnilrs-root`). The robot and controller yaml it reads are set in `mdb/_omnilrs.py` (`--robot` / `--controller` to read others):
 ```bash
 export OMNILRS_ROOT=/path/to/OmniLRS
 python3 mdb/generate_mdb_rover.py

@@ -1,18 +1,14 @@
-import argparse
-
 import yamcs.pymdb as MDB
 
 from _mdb_cli import write_image_buckets, write_mdb
-from _omnilrs import ROBOT_NAME, load_cameras, load_naming, load_yamcs_tmtc, omnilrs_root
+from _omnilrs import load_cameras, load_naming, load_streaming_fields, load_yamcs_tmtc, omnilrs_root, parse_args
 
-parser = argparse.ArgumentParser(description="Generate the rover MDB XML from the OmniLRS robot definition.")
-parser.add_argument(
-    "--omnilrs-root",
-    help="OmniLRS checkout to read cfg/robot/<robot>.yaml and src/tmtc/yamcs_naming.py from (default: $OMNILRS_ROOT)",
-)
-root = omnilrs_root(parser.parse_args().omnilrs_root)
+args = parse_args("Generate the rover MDB XML from the OmniLRS robot definition.")
+root = omnilrs_root(args.omnilrs_root)
 naming = load_naming(root)
-cameras = load_cameras(root, naming)
+cameras = load_cameras(root, args.robot)
+yamcs_tmtc = load_yamcs_tmtc(root, args.controller)
+streaming_fields = load_streaming_fields(root, args.robot)
 
 rover = MDB.System("Rover")
 
@@ -374,11 +370,11 @@ def streaming_parameter(system, name, camera):
 
 meta_systems = {}  # yamcs_naming.meta_path -> space system
 for camera in cameras:
-    camera_name = camera["name"]
+    camera_name = camera.name
     camera_system = subsystem_at(
         camera_subsystem,
         naming.camera_system(camera_name),
-        short_description=f"{camera_name} camera ({', '.join(camera['type'])})",
+        short_description=f"{camera_name} camera ({', '.join(camera.type)})",
     )
     for kind in naming.camera_kinds(camera):
         captures = f"{camera_name} {KIND_DESCRIPTIONS[kind]}"
@@ -388,8 +384,8 @@ for camera in cameras:
         for field in naming.IMAGE_META_FIELDS:
             image_meta_parameter(meta_systems[path], field, captures)
 
-    if naming.has_type(camera, "rgba"):
-        for field in naming.streaming_fields(ROBOT_NAME):
+    if camera.has_type("rgba"):
+        for field in streaming_fields:
             path, name = naming.streaming_param(camera_name, field).rsplit("/", 1)
             streaming_parameter(meta_systems[path], name, camera_name)
 
@@ -1136,6 +1132,6 @@ write_mdb(rover, "rover")
 # ==================================
 # Every bucket OmniLRS uploads images to: the cameras' buckets and the role and payload buckets of the controller yaml
 write_image_buckets(
-    [name for name, _ in naming.image_buckets(cameras, load_yamcs_tmtc(root))],
+    [name for name, _ in naming.image_buckets(cameras, yamcs_tmtc)],
     prefix=naming.BUCKET_PREFIX,
 )
