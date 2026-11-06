@@ -41,9 +41,9 @@
     },
     {
       "type": "verify",
-      "comment": "Streaming is ON",
+      "comment": "Streaming is ON (NavCam_left)",
       "condition": [
-        { "parameter": "/Rover/camera/images_streaming/state", "operator": "eq", "value": "ON" }
+        { "parameter": "/Rover/camera/NavCam_left/streaming/state", "operator": "eq", "value": "ON" }
       ],
       "delay": 0,
       "timeout": 15000
@@ -53,6 +53,7 @@
       "type": "command",
       "name": "/Rover/camera/set_camera_streaming_params",
       "arguments": [
+        { "name": "camera_name", "value": "NavCam_left" },
         { "name": "bitrate", "value": "100000" },
         { "name": "crf", "value": "-1" },
         { "name": "keyframe_interval", "value": "30" },
@@ -66,16 +67,17 @@
       "type": "check",
       "comment": "100 kbit/s, rover standing",
       "parameters": [
-        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
-        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
-        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
-        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+        { "parameter": "/Rover/camera/NavCam_left/streaming/bandwidth" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_sent" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_lost" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/decode_errors" }
       ]
     },
     {
       "type": "command",
       "name": "/Rover/camera/set_camera_streaming_params",
       "arguments": [
+        { "name": "camera_name", "value": "NavCam_left" },
         { "name": "bitrate", "value": "2000000" },
         { "name": "crf", "value": "-1" },
         { "name": "keyframe_interval", "value": "30" },
@@ -89,16 +91,17 @@
       "type": "check",
       "comment": "2 Mbit/s, rover standing: bandwidth should be higher than at 100 kbit/s",
       "parameters": [
-        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
-        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
-        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
-        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+        { "parameter": "/Rover/camera/NavCam_left/streaming/bandwidth" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_sent" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_lost" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/decode_errors" }
       ]
     },
     {
       "type": "command",
       "name": "/Rover/camera/set_camera_streaming_params",
       "arguments": [
+        { "name": "camera_name", "value": "NavCam_left" },
         { "name": "bitrate", "value": "500000" },
         { "name": "crf", "value": "30" },
         { "name": "keyframe_interval", "value": "30" },
@@ -112,10 +115,10 @@
       "type": "check",
       "comment": "crf 30, rover standing",
       "parameters": [
-        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
-        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
-        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
-        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+        { "parameter": "/Rover/camera/NavCam_left/streaming/bandwidth" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_sent" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_lost" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/decode_errors" }
       ]
     },
 
@@ -144,10 +147,10 @@
       "parameters": [
         { "parameter": "/Rover/pose_ground_truth.position.x" },
         { "parameter": "/Rover/pose_ground_truth.position.y" },
-        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
-        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
-        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
-        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+        { "parameter": "/Rover/camera/NavCam_left/streaming/bandwidth" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_sent" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_lost" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/decode_errors" }
       ]
     },
     {
@@ -165,10 +168,10 @@
       "comment": "After turning: yaw changed by about 90 deg",
       "parameters": [
         { "parameter": "/Rover/imu_orientation.yaw" },
-        { "parameter": "/Rover/camera/images_streaming/bandwidth" },
-        { "parameter": "/Rover/camera/images_streaming/packets_sent" },
-        { "parameter": "/Rover/camera/images_streaming/packets_lost" },
-        { "parameter": "/Rover/camera/images_streaming/decode_errors" }
+        { "parameter": "/Rover/camera/NavCam_left/streaming/bandwidth" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_sent" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/packets_lost" },
+        { "parameter": "/Rover/camera/NavCam_left/streaming/decode_errors" }
       ]
     },
 

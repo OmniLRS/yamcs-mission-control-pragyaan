@@ -35,13 +35,20 @@ pip3 install -r requirements.txt
 ## Common Commands
 
 1. (re)generate the Mission DataBase
+
+The rover cameras are defined in OmniLRS (`cfg/robot/pragyaan.yaml`), the image buckets in its controller yaml (`cfg/controller/pragyaan-controller.yaml`), the streaming telemetry fields in `src/mission_specific/pragyaan/tmtc/enums.py`, and the rule that maps them to MDB paths and storage buckets lives in OmniLRS `src/tmtc/yamcs_naming.py`.
+The rover generator reads them from an OmniLRS checkout given by `OMNILRS_ROOT` (or `--omnilrs-root`). The robot and controller yaml it reads are set in `mdb/_omnilrs.py` (`--robot` / `--controller` to read others):
 ```bash
+export OMNILRS_ROOT=/path/to/OmniLRS
 python3 mdb/generate_mdb_rover.py
 python3 mdb/generate_mdb_lander.py
 python3 mdb/generate_mdb_admin.py
 ```
 Outputs the XTCE XML files to `yamcs-server/src/main/yamcs/mdb/` for Yamcs to load them (the Ground Segment).
-Also copies the files to the OmniLRS rover simulation (the Space Segment) to make sure that always stay in sync.
+Nothing is copied to OmniLRS: at startup the OmniLRS rover simulation (the Space Segment) fetches the MDB from the running Yamcs server and checks its cameras, telemetry and commands against it.
+Yamcs loads the MDB when the instance starts, so restart Yamcs after regenerating.
+
+The rover generator also writes the image buckets into `yamcs-server/src/main/yamcs/etc/yamcs.yaml`: one per camera and kind (`images_<camera>_<kind>`) plus the lander, monitoring and APXS buckets of the OmniLRS controller yaml. They are filesystem buckets (one directory of PNG files each, under `target/yamcs/images/`) with limits sized to keep every image of a mission (100 GiB and 1,000,000 objects per bucket; Yamcs' default is 100 MB and 1000). Directory and limits are set in `mdb/_mdb_cli.py`. OmniLRS uploads into them and checks at startup that they exist; the rest of `yamcs.yaml` (comments included) is left as is.
 
 2. Run the Yamcs Server
 
@@ -53,17 +60,17 @@ Starts Yamcs Web on http://localhost:8090 with instance `workshop`.
 
 3. Run TMTC Mocks
 
-In separate terminals (with the venv activated):
+In separate terminals (with the venv activated and `OMNILRS_ROOT` set, the image mocks take the cameras and buckets from OmniLRS):
 
 ```bash
 # Telemetry simulator (1 Hz sinusoidal parameters) -> see values update in Yamcs Web / Telemetry / Parameters
 python3 tmtc_mock/telemetry/generate_tm.py
 
-# Streaming images (low-res, every 5s) -> see images in Yamcs web / Storage / Preview Panel
+# Streaming images (low-res, every 5s, one per rgba camera) -> see images in Yamcs web / Storage / Preview Panel
 python3 tmtc_mock/images/generate_image_stream.py
 
 # On-command images (listens for telecommands from Yamcs and generates hi-res camera images)
-# Send commands via Yamcs Web / Commanding / Send a Command / Rover / camera / camera_capture_high 
+# Send commands via Yamcs Web / Commanding / Send a Command / Rover / camera / camera_capture_high (pick a camera_name)
 python3 tmtc_mock/images/generate_image_oncommand.py
 ```
 

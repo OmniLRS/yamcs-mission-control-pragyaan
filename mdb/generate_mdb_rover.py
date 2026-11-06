@@ -1,6 +1,14 @@
 import yamcs.pymdb as MDB
 
-from _mdb_cli import parse_and_write
+from _mdb_cli import write_image_buckets, write_mdb
+from _omnilrs import load_cameras, load_naming, load_streaming_fields, load_yamcs_tmtc, omnilrs_root, parse_args
+
+args = parse_args("Generate the rover MDB XML from the OmniLRS robot definition.")
+root = omnilrs_root(args.omnilrs_root)
+naming = load_naming(root)
+cameras = load_cameras(root, args.robot)
+yamcs_tmtc = load_yamcs_tmtc(root, args.controller)
+streaming_fields = load_streaming_fields(root, args.robot)
 
 rover = MDB.System("Rover")
 
@@ -11,22 +19,8 @@ motor_subsystem = MDB.Subsystem(rover, "motor", short_description="Motor and dri
 camera_subsystem = MDB.Subsystem(rover, "camera", short_description="Camera control TMTC")
 payload_subsystem = MDB.Subsystem(rover, "payload", short_description="Payload configuration TMTC")
 
-# Create sub-subsystems for organizing camera-specific telemetry
-images_depth_subsystem = MDB.Subsystem(
-    camera_subsystem,
-    "images_depth",
-    short_description="Depth camera image metadata",
-)
-images_oncommand_subsystem = MDB.Subsystem(
-    camera_subsystem,
-    "images_oncommand",
-    short_description="On-command capture metadata",
-)
-images_streaming_subsystem = MDB.Subsystem(
-    camera_subsystem,
-    "images_streaming",
-    short_description="Streaming capture metadata",
-)
+# Create sub-subsystems for organizing payload-specific telemetry
+# (camera image metadata space systems are created per robot camera, see "Camera telemetry" below)
 images_apxs_subsystem = MDB.Subsystem(
     payload_subsystem,
     "images_apxs",
@@ -284,172 +278,116 @@ gyroscope = MDB.AggregateParameter(
     short_description="Gyroscope data with x, y, z components",
 )
 
-# Camera depth image metadata
-images_depth_url_storage = MDB.StringParameter(
-    system=images_depth_subsystem,
-    name="url_storage",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Storage endpoint for depth captures",
-)
+# Camera telemetry, one space system per robot camera with one child per image kind
+# (paths from OmniLRS yamcs_naming, cameras from the OmniLRS robot yaml):
+#   /Rover/camera/<camera>/<kind>/{number,name,url_storage,url_full,url_full_nginx}
+#   /Rover/camera/<camera>/streaming/{<streaming telemetry fields>}   (rgba cameras)
 
-images_depth_url_full = MDB.StringParameter(
-    system=images_depth_subsystem,
-    name="url_full",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="External URL for depth captures",
-)
+KIND_DESCRIPTIONS = {"streaming": "streaming", "oncommand": "on-command", "depth": "depth"}
 
-images_depth_url_full_nginx = MDB.StringParameter(
-    system=images_depth_subsystem,
-    name="url_full_nginx",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="NGINX reverse proxy URL for depth captures",
-)
 
-images_depth_number = MDB.IntegerParameter(
-    system=images_depth_subsystem,
-    name="number",
-    signed=False,
-    bits=32,
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Sequence identifier for depth captures",
-)
+def subsystem_at(parent, path, short_description):
+    """Subsystem of `parent` at the absolute MDB `path` computed by yamcs_naming."""
+    parent_path, name = path.rsplit("/", 1)
+    if parent_path != parent.qualified_name:
+        raise ValueError(f"{path} is not a direct child of {parent.qualified_name}")
+    return MDB.Subsystem(parent, name, short_description=short_description)
 
-images_depth_name = MDB.StringParameter(
-    system=images_depth_subsystem,
-    name="name",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Friendly name for the depth capture",
-)
 
-# Camera on-command image metadata
-images_oncommand_url_storage = MDB.StringParameter(
-    system=images_oncommand_subsystem,
-    name="url_storage",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Storage endpoint for on-command captures",
-)
+def image_meta_parameter(system, field, captures):
+    """Image metadata parameter `field` (yamcs_naming.IMAGE_META_FIELDS), e.g. captures="NavCam_left streaming"."""
+    if field == "number":
+        return MDB.IntegerParameter(
+            system=system,
+            name=field,
+            signed=False,
+            bits=32,
+            data_source=MDB.DataSource.LOCAL,
+            short_description=f"Sequence identifier for {captures} captures",
+        )
+    descriptions = {
+        "name": f"Friendly name for the {captures} capture",
+        "url_storage": f"Storage endpoint for {captures} captures",
+        "url_full": f"External URL for {captures} captures",
+        "url_full_nginx": f"NGINX reverse proxy URL for {captures} captures",
+    }
+    return MDB.StringParameter(
+        system=system,
+        name=field,
+        data_source=MDB.DataSource.LOCAL,
+        short_description=descriptions[field],
+    )
 
-images_oncommand_url_full = MDB.StringParameter(
-    system=images_oncommand_subsystem,
-    name="url_full",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="External URL for on-command captures",
-)
 
-images_oncommand_url_full_nginx = MDB.StringParameter(
-    system=images_oncommand_subsystem,
-    name="url_full_nginx",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="NGINX reverse proxy URL for on-command captures",
-)
+def streaming_parameter(system, name, camera):
+    """Streaming telemetry parameter of an rgba camera (yamcs_naming.STREAMING_FIELDS)."""
+    if name == "state":
+        return MDB.EnumeratedParameter(
+            system=system,
+            name=name,
+            choices=[
+                (0, "OFF"),
+                (1, "ON"),
+            ],
+            data_source=MDB.DataSource.LOCAL,
+            short_description=f"{camera} streaming pipeline state",
+        )
+    # 0 is valid: OmniLRS sends the bandwidth from startup, and it stays 0 until the first frame is encoded.
+    if name == "bandwidth":
+        return MDB.IntegerParameter(
+            system=system,
+            name=name,
+            signed=False,
+            bits=32,
+            data_source=MDB.DataSource.LOCAL,
+            short_description=f"Rolling encoded H.264 bitrate of the {camera} stream",
+            units="bit/s",
+        )
+    # Cumulative 16-bit counters: OmniLRS wraps them from 65535 back to 0 like hardware counters
+    # (see transmit_camera_compression_info in OmniLRS).
+    if name in ("packets_sent", "packets_lost"):
+        return MDB.IntegerParameter(
+            system=system,
+            name=name,
+            signed=False,
+            bits=16,
+            data_source=MDB.DataSource.LOCAL,
+            short_description=f"Cumulative {camera} streaming {name.replace('_', ' ')}, wraps to 0 after 65535",
+            units="counts",
+        )
+    if name == "decode_errors":
+        return MDB.IntegerParameter(
+            system=system,
+            name=name,
+            signed=False,
+            bits=32,
+            data_source=MDB.DataSource.LOCAL,
+            short_description=f"Cumulative {camera} streaming H.264 decode errors",
+            units="counts",
+        )
+    raise ValueError(f"no MDB definition for streaming telemetry field {name!r}")
 
-images_oncommand_number = MDB.IntegerParameter(
-    system=images_oncommand_subsystem,
-    name="number",
-    signed=False,
-    bits=32,
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Sequence identifier for on-command captures",
-)
 
-images_oncommand_name = MDB.StringParameter(
-    system=images_oncommand_subsystem,
-    name="name",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Friendly name for the on-command capture",
-)
+meta_systems = {}  # yamcs_naming.meta_path -> space system
+for camera in cameras:
+    camera_name = camera.name
+    camera_system = subsystem_at(
+        camera_subsystem,
+        naming.camera_system(camera_name),
+        short_description=f"{camera_name} camera ({', '.join(camera.type)})",
+    )
+    for kind in naming.camera_kinds(camera):
+        captures = f"{camera_name} {KIND_DESCRIPTIONS[kind]}"
+        path = naming.meta_path(camera_name, kind)
+        description = f"{captures} image metadata" + (" and stream telemetry" if kind == "streaming" else "")
+        meta_systems[path] = subsystem_at(camera_system, path, short_description=description)
+        for field in naming.IMAGE_META_FIELDS:
+            image_meta_parameter(meta_systems[path], field, captures)
 
-# Camera streaming image metadata
-images_streaming_url_storage = MDB.StringParameter(
-    system=images_streaming_subsystem,
-    name="url_storage",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Storage endpoint for streaming captures",
-)
-
-images_streaming_url_full = MDB.StringParameter(
-    system=images_streaming_subsystem,
-    name="url_full",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="External URL for streaming captures",
-)
-
-images_streaming_url_full_nginx = MDB.StringParameter(
-    system=images_streaming_subsystem,
-    name="url_full_nginx",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="NGINX reverse proxy URL for streaming captures",
-)
-
-images_streaming_number = MDB.IntegerParameter(
-    system=images_streaming_subsystem,
-    name="number",
-    signed=False,
-    bits=32,
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Sequence identifier for streaming captures",
-)
-
-images_streaming_name = MDB.StringParameter(
-    system=images_streaming_subsystem,
-    name="name",
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Friendly name for the streaming capture",
-)
-
-images_streaming_state = MDB.EnumeratedParameter(
-    system=images_streaming_subsystem,
-    name="state",
-    choices=[
-        (0, "OFF"),
-        (1, "ON"),
-    ],
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Streaming pipeline state",
-)
-
-images_streaming_bandwidth = MDB.IntegerParameter(
-    system=images_streaming_subsystem,
-    name="bandwidth",
-    bits=32,
-    minimum=1000,
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Rolling encoded H.264 bitrate of the streaming camera",
-    units="bit/s",
-)
-
-# Cumulative 16-bit counters: OmniLRS wraps them from 65535 back to 0 like hardware counters
-# (see transmit_camera_compression_info in OmniLRS).
-images_streaming_packets_sent = MDB.IntegerParameter(
-    system=images_streaming_subsystem,
-    name="packets_sent",
-    signed=False,
-    bits=16,
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Cumulative streaming packets sent, wraps to 0 after 65535",
-    units="counts",
-)
-
-images_streaming_packets_lost = MDB.IntegerParameter(
-    system=images_streaming_subsystem,
-    name="packets_lost",
-    signed=False,
-    bits=16,
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Cumulative streaming packets lost, wraps to 0 after 65535",
-    units="counts",
-)
-
-images_streaming_decode_errors = MDB.IntegerParameter(
-    system=images_streaming_subsystem,
-    name="decode_errors",
-    signed=False,
-    bits=32,
-    data_source=MDB.DataSource.LOCAL,
-    short_description="Cumulative streaming H.264 decode errors",
-    units="counts",
-)
+    if camera.has_type("rgba"):
+        for field in streaming_fields:
+            path, name = naming.streaming_param(camera_name, field).rsplit("/", 1)
+            streaming_parameter(meta_systems[path], name, camera_name)
 
 # Camera APXS image metadata
 images_apxs_url_storage = MDB.StringParameter(
@@ -883,6 +821,23 @@ drive_turn = MDB.Command(
 
 # Camera commands
 
+
+def camera_name_argument(command_name):
+    """camera_name argument: the robot cameras whose type matches the command (yamcs_naming.cameras_for_command)."""
+    labels = naming.cameras_for_command(cameras, command_name)
+    if not labels:
+        camera_type = naming.CAMERA_COMMAND_TYPE[command_name]
+        raise ValueError(f"{command_name}: no camera of type {camera_type!r} in the robot yaml")
+    return MDB.EnumeratedArgument(
+        name=naming.CAMERA_NAME_ARG,
+        choices=list(enumerate(labels)),
+        short_description=f"Camera ({naming.CAMERA_COMMAND_TYPE[command_name]} cameras of the robot)",
+        encoding=MDB.IntegerEncoding(bits=8, scheme=MDB.IntegerEncodingScheme.UNSIGNED)
+    )
+
+
+camera_streaming_camera_arg = camera_name_argument("camera_streaming")
+
 camera_streaming_arg = MDB.EnumeratedArgument(
     name="action",
     choices=[(0, "STOP"), (1, "START")],
@@ -893,12 +848,16 @@ camera_streaming_arg = MDB.EnumeratedArgument(
 camera_streaming = MDB.Command(
     system=camera_subsystem,
     name="camera_streaming",
-    arguments=[camera_streaming_arg],
+    arguments=[camera_streaming_camera_arg, camera_streaming_arg],
     entries=[
         MDB.FixedValueEntry(
             name="command_name",
             binary=b"camera_streaming",
             short_description="Command name identifier",
+        ),
+        MDB.ArgumentEntry(
+            argument=camera_streaming_camera_arg,
+            short_description="Camera name argument",
         ),
         MDB.ArgumentEntry(
             argument=camera_streaming_arg,
@@ -908,35 +867,47 @@ camera_streaming = MDB.Command(
     short_description="Start or stop camera streaming",
 )
 
+camera_capture_high_camera_arg = camera_name_argument("camera_capture_high")
+
 camera_capture_high = MDB.Command(
     system=camera_subsystem,
     name="camera_capture_high",
-    arguments=[],
+    arguments=[camera_capture_high_camera_arg],
     entries=[
         MDB.FixedValueEntry(
             name="command_name",
             binary=b"camera_capture_high",  # Command name as bytes
             short_description="Command name identifier",
-        )
+        ),
+        MDB.ArgumentEntry(
+            argument=camera_capture_high_camera_arg,
+            short_description="Camera name argument",
+        ),
     ],
     short_description="Capture a high-resolution image",
 )
 
+camera_capture_depth_camera_arg = camera_name_argument("camera_capture_depth")
+
 camera_capture_depth = MDB.Command(
     system=camera_subsystem,
     name="camera_capture_depth",
-    arguments=[],
+    arguments=[camera_capture_depth_camera_arg],
     entries=[
         MDB.FixedValueEntry(
             name="command_name",
             binary=b"camera_capture_depth",  # Command name as bytes
             short_description="Command name identifier",
-        )
+        ),
+        MDB.ArgumentEntry(
+            argument=camera_capture_depth_camera_arg,
+            short_description="Camera name argument",
+        ),
     ],
     short_description="Capture a depth image",
 )
 
-# Camera streaming compression parameters (same as camera_compression in pragyaan-controller.yaml)
+# Camera streaming compression parameters of one rgba camera (defaults: camera_compression in pragyaan-controller.yaml)
 
 bitrate_arg = MDB.IntegerArgument(
     name="bitrate",
@@ -992,10 +963,13 @@ bandwidth_window_seconds_arg = MDB.FloatArgument(
     encoding=MDB.FloatEncoding(bits=32),
 )
 
+set_camera_streaming_params_camera_arg = camera_name_argument("set_camera_streaming_params")
+
 set_camera_streaming_params = MDB.Command(
     system=camera_subsystem,
     name="set_camera_streaming_params",
     arguments=[
+        set_camera_streaming_params_camera_arg,
         bitrate_arg,
         crf_arg,
         keyframe_interval_arg,
@@ -1007,6 +981,10 @@ set_camera_streaming_params = MDB.Command(
             name="command_name",
             binary=b"set_camera_streaming_params",
             short_description="Command name identifier",
+        ),
+        MDB.ArgumentEntry(
+            argument=set_camera_streaming_params_camera_arg,
+            short_description="Camera name argument",
         ),
         MDB.ArgumentEntry(
             argument=bitrate_arg,
@@ -1029,7 +1007,7 @@ set_camera_streaming_params = MDB.Command(
             short_description="Bandwidth window argument",
         ),
     ],
-    short_description="Set the camera streaming compression parameters",
+    short_description="Set the streaming compression parameters of a camera",
 )
 
 # Camera settings: single config file path argument
@@ -1147,4 +1125,13 @@ power_electronics = MDB.Command(
 # Emit an XML that conforms to XTCE
 # print(rover.dumps())
 
-parse_and_write(rover, "rover")
+write_mdb(rover, "rover")
+
+# ==================================
+# Image buckets (etc/yamcs.yaml)
+# ==================================
+# Every bucket OmniLRS uploads images to: the cameras' buckets and the role and payload buckets of the controller yaml
+write_image_buckets(
+    [name for name, _ in naming.image_buckets(cameras, yamcs_tmtc)],
+    prefix=naming.BUCKET_PREFIX,
+)

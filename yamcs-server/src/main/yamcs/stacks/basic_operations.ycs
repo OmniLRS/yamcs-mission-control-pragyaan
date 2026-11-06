@@ -49,9 +49,9 @@
     },
     {
       "type": "verify",
-      "comment": "Camera stream is ON",
+      "comment": "Camera stream is ON (NavCam_left)",
       "condition": [
-        { "parameter": "/Rover/camera/images_streaming/state", "operator": "eq", "value": "ON" }
+        { "parameter": "/Rover/camera/NavCam_left/streaming/state", "operator": "eq", "value": "ON" }
       ],
       "delay": 0,
       "timeout": 15000
