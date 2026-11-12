@@ -31,11 +31,12 @@ PARAMETER_CONFIG = {
         }
     },
     
-    # IMU - Orientation, Accelerometer, Gyroscope (Aggregates)
+    # IMU - Orientation, Accelerometer, Gyroscope (Aggregates), in SI units like OmniLRS
+    # (Yamcs derives /Rover/imu_orientation_deg and /Rover/imu_gyroscope_deg)
     "/Rover/imu_orientation": {
-        "roll": (-180.0, 180.0, 20.0, 0.0),
-        "pitch": (-90.0, 90.0, 25.0, 3.0),
-        "yaw": (-180.0, 180.0, 30.0, 6.0),
+        "roll": (-math.pi, math.pi, 20.0, 0.0),           # rad
+        "pitch": (-math.pi / 2, math.pi / 2, 25.0, 3.0),  # rad
+        "yaw": (-math.pi, math.pi, 30.0, 6.0),            # rad
     },
     "/Rover/imu_accelerometer": {
         "ax": (-10.0, 10.0, 12.0, 0.0),
@@ -43,9 +44,9 @@ PARAMETER_CONFIG = {
         "az": (-10.0, 10.0, 18.0, 4.0),
     },
     "/Rover/imu_gyroscope": {
-        "gx": (-180.0, 180.0, 10.0, 0.0),
-        "gy": (-180.0, 180.0, 15.0, 2.5),
-        "gz": (-180.0, 180.0, 20.0, 5.0),
+        "gx": (-math.pi, math.pi, 10.0, 0.0),  # rad/s
+        "gy": (-math.pi, math.pi, 15.0, 2.5),  # rad/s
+        "gz": (-math.pi, math.pi, 20.0, 5.0),  # rad/s
     },
     
     # Motors - Current (Array of 6 floats)

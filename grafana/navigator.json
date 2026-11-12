@@ -1335,7 +1335,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "fields": [],
-          "parameter": "/Rover/imu_orientation.roll",
+          "parameter": "/Rover/imu_orientation_deg.roll",
           "refId": "A",
           "type": "plot"
         }
@@ -1464,7 +1464,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "fields": [],
-          "parameter": "/Rover/imu_orientation.pitch",
+          "parameter": "/Rover/imu_orientation_deg.pitch",
           "refId": "A",
           "type": "plot"
         }
@@ -1811,7 +1811,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "fields": [],
-          "parameter": "/Rover/imu_orientation.yaw",
+          "parameter": "/Rover/imu_orientation_deg.yaw",
           "refId": "A",
           "type": "plot"
         }

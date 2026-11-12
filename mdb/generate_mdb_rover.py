@@ -200,6 +200,10 @@ pose_ground_truth = MDB.AggregateParameter(
 
 
 # IMU
+# OmniLRS sends the raw sensor values in SI units (rad, rad/s, m/s^2), without conversion.
+# Yamcs derives imu_orientation_deg and imu_gyroscope_deg from them for the operators (see "Derived parameters").
+ANGLE_LIMIT_RAD = 3.1416  # pi rounded up: pi stored as a 32-bit float (3.1415927) is in the range
+
 orientation = MDB.AggregateParameter(
     system=rover,
     name="imu_orientation",
@@ -207,23 +211,23 @@ orientation = MDB.AggregateParameter(
         MDB.FloatMember(
             name="roll",
             bits=32,
-            minimum=-180.0,
-            maximum=180.0,
-            units="deg",
+            minimum=-ANGLE_LIMIT_RAD,
+            maximum=ANGLE_LIMIT_RAD,
+            units="rad",
         ),
         MDB.FloatMember(
             name="pitch",
             bits=32,
-            minimum=-180.0,
-            maximum=180.0,
-            units="deg",
+            minimum=-ANGLE_LIMIT_RAD,
+            maximum=ANGLE_LIMIT_RAD,
+            units="rad",
         ),
         MDB.FloatMember(
             name="yaw",
             bits=32,
-            minimum=-180.0,
-            maximum=180.0,
-            units="deg",
+            minimum=-ANGLE_LIMIT_RAD,
+            maximum=ANGLE_LIMIT_RAD,
+            units="rad",
         ),
     ],
     data_source=MDB.DataSource.LOCAL,
@@ -261,22 +265,52 @@ gyroscope = MDB.AggregateParameter(
         MDB.FloatMember(
             name="gx",
             bits=32,
-            units="deg/s",
+            units="rad/s",
         ),
         MDB.FloatMember(
             name="gy",
             bits=32,
-            units="deg/s",
+            units="rad/s",
         ),
         MDB.FloatMember(
             name="gz",
             bits=32,
-            units="deg/s",
+            units="rad/s",
         ),
     ],
     data_source=MDB.DataSource.LOCAL,
     short_description="Gyroscope data with x, y, z components",
 )
+
+
+# Derived parameters: Yamcs computes them with an algorithm each time the source parameter updates
+def add_degree_parameter(source: MDB.AggregateParameter, units: str) -> MDB.AggregateParameter:
+    """Add <source>_deg: the members of `source` (in radians) converted to degrees."""
+    members = [member.name for member in source.members]
+    derived = MDB.AggregateParameter(
+        system=rover,
+        name=f"{source.name}_deg",
+        members=[MDB.FloatMember(name=name, bits=32, units=units) for name in members],
+        data_source=MDB.DataSource.DERIVED,
+        short_description=f"{source.name} converted to {units}",
+    )
+    MDB.Algorithm(
+        system=rover,
+        name=f"{source.name}_to_deg",
+        language="JavaScript",
+        text=f"deg.value = {{{', '.join(f'{name}: {name}.value * 180 / Math.PI' for name in members)}}};",
+        inputs=[
+            MDB.InputParameter(MDB.ParameterMember(source, member), name=member.name, required=True)
+            for member in source.members
+        ],
+        outputs=[MDB.OutputParameter(derived, name="deg")],
+        short_description=f"Convert {source.name} from radians to {units}",
+    )
+    return derived
+
+
+orientation_deg = add_degree_parameter(orientation, units="deg")
+gyroscope_deg = add_degree_parameter(gyroscope, units="deg/s")
 
 # Camera telemetry, one space system per robot camera with one child per image kind
 # (paths from OmniLRS yamcs_naming, cameras from the OmniLRS robot yaml):
