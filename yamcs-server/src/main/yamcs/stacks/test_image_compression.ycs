@@ -128,7 +128,7 @@
       "parameters": [
         { "parameter": "/Rover/pose_ground_truth.position.x" },
         { "parameter": "/Rover/pose_ground_truth.position.y" },
-        { "parameter": "/Rover/imu_orientation.yaw" }
+        { "parameter": "/Rover/imu_orientation_deg.yaw" }
       ]
     },
     {
@@ -167,7 +167,7 @@
       "type": "check",
       "comment": "After turning: yaw changed by about 90 deg",
       "parameters": [
-        { "parameter": "/Rover/imu_orientation.yaw" },
+        { "parameter": "/Rover/imu_orientation_deg.yaw" },
         { "parameter": "/Rover/camera/NavCam_left/streaming/bandwidth" },
         { "parameter": "/Rover/camera/NavCam_left/streaming/packets_sent" },
         { "parameter": "/Rover/camera/NavCam_left/streaming/packets_lost" },

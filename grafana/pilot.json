@@ -768,7 +768,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "fields": [],
-          "parameter": "/Rover/imu_orientation.roll",
+          "parameter": "/Rover/imu_orientation_deg.roll",
           "refId": "A",
           "type": "plot"
         }
@@ -867,7 +867,7 @@
           },
           "endpoint": "",
           "endpointVariable": "$endpoint_variable",
-          "parameter": "/Rover/imu_gyroscope.gx",
+          "parameter": "/Rover/imu_gyroscope_deg.gx",
           "refId": "A",
           "type": "plot"
         },
@@ -881,7 +881,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "hide": false,
-          "parameter": "/Rover/imu_gyroscope.gy",
+          "parameter": "/Rover/imu_gyroscope_deg.gy",
           "refId": "B",
           "type": "plot"
         },
@@ -895,7 +895,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "hide": false,
-          "parameter": "/Rover/imu_gyroscope.gz",
+          "parameter": "/Rover/imu_gyroscope_deg.gz",
           "refId": "C",
           "type": "plot"
         }
@@ -1425,7 +1425,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "fields": [],
-          "parameter": "/Rover/imu_orientation.pitch",
+          "parameter": "/Rover/imu_orientation_deg.pitch",
           "refId": "A",
           "type": "plot"
         }
@@ -2070,7 +2070,7 @@
           "endpoint": "workshop_realtime",
           "endpointVariable": "$endpoint_variable",
           "fields": [],
-          "parameter": "/Rover/imu_orientation.yaw",
+          "parameter": "/Rover/imu_orientation_deg.yaw",
           "refId": "A",
           "type": "plot"
         }

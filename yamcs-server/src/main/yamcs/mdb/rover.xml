@@ -97,15 +97,37 @@ See https://docs.yamcs.org/pymdb/
       </AggregateParameterType>
       <FloatParameterType name="imu_gyroscope__gx" sizeInBits="32">
         <UnitSet>
-          <Unit form="calibrated">deg/s</Unit>
+          <Unit form="calibrated">rad/s</Unit>
         </UnitSet>
       </FloatParameterType>
       <FloatParameterType name="imu_gyroscope__gy" sizeInBits="32">
         <UnitSet>
-          <Unit form="calibrated">deg/s</Unit>
+          <Unit form="calibrated">rad/s</Unit>
         </UnitSet>
       </FloatParameterType>
       <FloatParameterType name="imu_gyroscope__gz" sizeInBits="32">
+        <UnitSet>
+          <Unit form="calibrated">rad/s</Unit>
+        </UnitSet>
+      </FloatParameterType>
+      <AggregateParameterType name="imu_gyroscope_deg">
+        <MemberList>
+          <Member name="gx" typeRef="imu_gyroscope_deg__gx"/>
+          <Member name="gy" typeRef="imu_gyroscope_deg__gy"/>
+          <Member name="gz" typeRef="imu_gyroscope_deg__gz"/>
+        </MemberList>
+      </AggregateParameterType>
+      <FloatParameterType name="imu_gyroscope_deg__gx" sizeInBits="32">
+        <UnitSet>
+          <Unit form="calibrated">deg/s</Unit>
+        </UnitSet>
+      </FloatParameterType>
+      <FloatParameterType name="imu_gyroscope_deg__gy" sizeInBits="32">
+        <UnitSet>
+          <Unit form="calibrated">deg/s</Unit>
+        </UnitSet>
+      </FloatParameterType>
+      <FloatParameterType name="imu_gyroscope_deg__gz" sizeInBits="32">
         <UnitSet>
           <Unit form="calibrated">deg/s</Unit>
         </UnitSet>
@@ -119,21 +141,43 @@ See https://docs.yamcs.org/pymdb/
       </AggregateParameterType>
       <FloatParameterType name="imu_orientation__roll" sizeInBits="32">
         <UnitSet>
-          <Unit form="calibrated">deg</Unit>
+          <Unit form="calibrated">rad</Unit>
         </UnitSet>
-        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-180.0" maxInclusive="180.0"/>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-3.1416" maxInclusive="3.1416"/>
       </FloatParameterType>
       <FloatParameterType name="imu_orientation__pitch" sizeInBits="32">
         <UnitSet>
-          <Unit form="calibrated">deg</Unit>
+          <Unit form="calibrated">rad</Unit>
         </UnitSet>
-        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-180.0" maxInclusive="180.0"/>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-3.1416" maxInclusive="3.1416"/>
       </FloatParameterType>
       <FloatParameterType name="imu_orientation__yaw" sizeInBits="32">
         <UnitSet>
+          <Unit form="calibrated">rad</Unit>
+        </UnitSet>
+        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-3.1416" maxInclusive="3.1416"/>
+      </FloatParameterType>
+      <AggregateParameterType name="imu_orientation_deg">
+        <MemberList>
+          <Member name="roll" typeRef="imu_orientation_deg__roll"/>
+          <Member name="pitch" typeRef="imu_orientation_deg__pitch"/>
+          <Member name="yaw" typeRef="imu_orientation_deg__yaw"/>
+        </MemberList>
+      </AggregateParameterType>
+      <FloatParameterType name="imu_orientation_deg__roll" sizeInBits="32">
+        <UnitSet>
           <Unit form="calibrated">deg</Unit>
         </UnitSet>
-        <ValidRange validRangeAppliesToCalibrated="true" minInclusive="-180.0" maxInclusive="180.0"/>
+      </FloatParameterType>
+      <FloatParameterType name="imu_orientation_deg__pitch" sizeInBits="32">
+        <UnitSet>
+          <Unit form="calibrated">deg</Unit>
+        </UnitSet>
+      </FloatParameterType>
+      <FloatParameterType name="imu_orientation_deg__yaw" sizeInBits="32">
+        <UnitSet>
+          <Unit form="calibrated">deg</Unit>
+        </UnitSet>
       </FloatParameterType>
       <ArrayParameterType name="motor_current" arrayTypeRef="motor_current__el">
         <DimensionList>
@@ -363,8 +407,14 @@ See https://docs.yamcs.org/pymdb/
       <Parameter name="imu_gyroscope" parameterTypeRef="imu_gyroscope" shortDescription="Gyroscope data with x, y, z components">
         <ParameterProperties dataSource="local" persistence="true"/>
       </Parameter>
+      <Parameter name="imu_gyroscope_deg" parameterTypeRef="imu_gyroscope_deg" shortDescription="imu_gyroscope converted to deg/s">
+        <ParameterProperties dataSource="derived" persistence="true"/>
+      </Parameter>
       <Parameter name="imu_orientation" parameterTypeRef="imu_orientation" shortDescription="Orientation data with roll, pitch, and yaw">
         <ParameterProperties dataSource="local" persistence="true"/>
+      </Parameter>
+      <Parameter name="imu_orientation_deg" parameterTypeRef="imu_orientation_deg" shortDescription="imu_orientation converted to deg">
+        <ParameterProperties dataSource="derived" persistence="true"/>
       </Parameter>
       <Parameter name="motor_current" parameterTypeRef="motor_current" shortDescription="Array of motor current readings for the six wheels">
         <ParameterProperties dataSource="local" persistence="true"/>
@@ -427,6 +477,40 @@ See https://docs.yamcs.org/pymdb/
         <ParameterProperties dataSource="local" persistence="true"/>
       </Parameter>
     </ParameterSet>
+    <AlgorithmSet>
+      <CustomAlgorithm name="imu_gyroscope_to_deg" shortDescription="Convert imu_gyroscope from radians to deg/s">
+        <AncillaryDataSet>
+          <AncillaryData name="Yamcs:AlgorithmMandatoryInput">gx</AncillaryData>
+          <AncillaryData name="Yamcs:AlgorithmMandatoryInput">gy</AncillaryData>
+          <AncillaryData name="Yamcs:AlgorithmMandatoryInput">gz</AncillaryData>
+        </AncillaryDataSet>
+        <AlgorithmText language="JavaScript">deg.value = {gx: gx.value * 180 / Math.PI, gy: gy.value * 180 / Math.PI, gz: gz.value * 180 / Math.PI};</AlgorithmText>
+        <InputSet>
+          <InputParameterInstanceRef parameterRef="imu_gyroscope/gx" instance="0" inputName="gx"/>
+          <InputParameterInstanceRef parameterRef="imu_gyroscope/gy" instance="0" inputName="gy"/>
+          <InputParameterInstanceRef parameterRef="imu_gyroscope/gz" instance="0" inputName="gz"/>
+        </InputSet>
+        <OutputSet>
+          <OutputParameterRef parameterRef="imu_gyroscope_deg" outputName="deg"/>
+        </OutputSet>
+      </CustomAlgorithm>
+      <CustomAlgorithm name="imu_orientation_to_deg" shortDescription="Convert imu_orientation from radians to deg">
+        <AncillaryDataSet>
+          <AncillaryData name="Yamcs:AlgorithmMandatoryInput">roll</AncillaryData>
+          <AncillaryData name="Yamcs:AlgorithmMandatoryInput">pitch</AncillaryData>
+          <AncillaryData name="Yamcs:AlgorithmMandatoryInput">yaw</AncillaryData>
+        </AncillaryDataSet>
+        <AlgorithmText language="JavaScript">deg.value = {roll: roll.value * 180 / Math.PI, pitch: pitch.value * 180 / Math.PI, yaw: yaw.value * 180 / Math.PI};</AlgorithmText>
+        <InputSet>
+          <InputParameterInstanceRef parameterRef="imu_orientation/roll" instance="0" inputName="roll"/>
+          <InputParameterInstanceRef parameterRef="imu_orientation/pitch" instance="0" inputName="pitch"/>
+          <InputParameterInstanceRef parameterRef="imu_orientation/yaw" instance="0" inputName="yaw"/>
+        </InputSet>
+        <OutputSet>
+          <OutputParameterRef parameterRef="imu_orientation_deg" outputName="deg"/>
+        </OutputSet>
+      </CustomAlgorithm>
+    </AlgorithmSet>
   </TelemetryMetaData>
   <CommandMetaData/>
   <SpaceSystem name="camera" shortDescription="Camera control TMTC">
